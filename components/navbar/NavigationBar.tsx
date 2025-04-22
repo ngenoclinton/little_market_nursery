@@ -54,7 +54,7 @@ const Navbar = () => {
     <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? "shadow-md" : ""}`}>
       {/* Contact Banner */}
       {contactBanner && (
-        <div className="bg-[#3aa756] text-white py-2 px-4 flex justify-between items-center">
+        <div className="bg-[#3aa756]/90 text-white py-2 px-4 flex justify-between items-center">
           <div className="flex items-center">
             <MapPin size={16} className="mr-2" />
             <span>{contactBanner}</span>
