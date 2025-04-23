@@ -1,30 +1,30 @@
 import type React from "react"
+import "@/app/globals.css"
 import type { Metadata } from "next"
-import { Nunito } from "next/font/google"
-import "./globals.css"
+import { Quicksand } from "next/font/google"
 import Navbar from "@/components/navbar/NavigationBar"
 
-const nunito = Nunito({
+const quicksand = Quicksand({
   subsets: ["latin"],
-  variable: "--font-nunito",
-  display: "swap",
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-quicksand",
 })
 
 export const metadata: Metadata = {
-  title: "Little Learners Kindergarten",
-  description: "Nurturing young minds with care and creativity",
+  title: "Kid's Promising Tomorrow - Nurturing Young Minds",
+  description: "A nurturing environment for children to learn, grow, and thrive.",
 }
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode
-}) {
+}>) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body className={`${nunito.variable} font-nunito`}>
-        <Navbar />
-        {children}
+    <html lang="en" className={quicksand.variable}>
+      <body className="min-h-screen flex flex-col">
+          <Navbar/>
+          <div className="flex-grow pt-[160px]">{children}</div>
       </body>
     </html>
   )

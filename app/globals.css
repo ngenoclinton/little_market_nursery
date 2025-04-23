@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@tailwind utilities;
 
 :root {
   --background: #ffffff;
@@ -11,8 +12,25 @@
   --alert: #df2020;
   --secondary: #df2020;
   --accent: #0066b3;
+  --font-quicksand: 'Quicksand', sans-serif; /* Fallback, if needed */
 }
 
+html {
+  font-family: var(--font-quicksand);
+}
+body {
+  @apply text-gray-800;
+}
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-quicksand);
+}
+
+h1,h2,h3,h4,h5,h6 {
+  font-family: "Quicksand", sans-serif;
+  @apply font-bold;
+}
 
 @theme inline {
   --color-background: var(--background);
@@ -26,12 +44,6 @@
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 @layer base {
@@ -74,6 +86,34 @@ body {
 .hero-slide {
   animation: fadeEffect 1s ease-in-out;
 }
+@keyframes loader {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/*  */
+.animate-loader {
+  animation: loader 1.5s infinite;
+} 
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out;
+}
 
 @keyframes fadeEffect {
   from {
@@ -111,35 +151,9 @@ body {
     transform: rotate(360deg);
   }
 }
+
+
 /*  */
-@keyframes loader {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(100%);
-  }
-}
-
-.animate-loader {
-  animation: loader 1.5s infinite;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fadeIn {
-  animation: fadeIn 0.3s ease-out;
-}
-
 /* Dropdown animation for navbar */
 .dropdown-menu {
   transform-origin: top center;
@@ -160,3 +174,23 @@ body {
     transform: scaleY(1);
   }
 }
+
+/*  */
+/* Custom card styles */
+.info-card {
+  @apply rounded-xl shadow-xl transition-all duration-300;
+}
+
+.info-card:hover {
+  @apply shadow-2xl transform -translate-y-1;
+}
+
+/* Age group icons */
+.age-icon-container {
+  @apply relative rounded-full overflow-hidden transition-transform duration-300;
+}
+
+.age-icon-container:hover {
+  @apply transform scale-110;
+}
+/*  */
