@@ -7,28 +7,28 @@ const ageGroups = [
     description:
       "A loving, nurturing environment tailored to your baby's routine, with daily feedback and sensory activities.",
     color: "#fcb900",
-    icon: "/icons/baby-icon.svg",
+    icon: "/images/homeImages/babies/JBaby-Pumpkin.webp",
   },
   {
     name: "Toddlers",
     ageRange: "12–24 months",
     description: "Sensory exploration, gross motor activities, and social interaction.",
     color: "#ff6900",
-    icon: "/icons/toddler-icon.svg",
+    icon: "/images/homeImages/tots/JTots-Creating-Stick.webp",
   },
   {
     name: "Pre-Preschool",
     ageRange: "22–36 months",
     description: "Communication, imaginative play, puzzles, and language-rich activities.",
     color: "#df2020",
-    icon: "/icons/pre-preschool-icon.svg",
+    icon: "/images/homeImages/pre-school/pre-sch-1/JBeans-Play-Dough.webp",
   },
   {
     name: "Preschool",
     ageRange: "3–5 years",
     description: "Prepares for primary school through structured play, roleplay, crafts, reading, and outdoor play.",
     color: "#3aa756",
-    icon: "/icons/preschool-icon.svg",
+    icon: "/images/homeImages/pre-school/pre-sch-1/JBeans-water-Play.webp",
   },
 ]
 
