@@ -40,7 +40,7 @@ export default function FeaturesSection() {
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#3aa756]">Why Choose Us</h2>
           <p className="text-gray-700 max-w-3xl mx-auto">
-            At Kid&apos;s Promising Tomorrow, we provide exceptional early education and care in a nurturing environment
+            At Little Market Nursery, we provide exceptional early education and care in a nurturing environment
             that fosters growth and development.
           </p>
         </div>

@@ -10,7 +10,7 @@ const testimonials = [
     name: "Sarah Johnson",
     role: "Parent",
     quote:
-      "Kid's Promising Tomorrow has been a wonderful second home for my daughter. The teachers are caring and attentive, and the curriculum is engaging and educational. I've seen tremendous growth in her confidence and skills.",
+      "Little Market Nursery has been a wonderful second home for my daughter. The teachers are caring and attentive, and the curriculum is engaging and educational. I've seen tremendous growth in her confidence and skills.",
     image: "https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=740",
   },
   {
@@ -18,7 +18,7 @@ const testimonials = [
     name: "Michael Thompson",
     role: "Parent",
     quote:
-      "We couldn't be happier with our decision to enroll our son at Kid's Promising Tomorrow. The staff creates such a positive and nurturing environment. Our son is always excited to go to school and comes home full of stories about what he learned.",
+      "We couldn't be happier with our decision to enroll our son at Little Market Nursery. The staff creates such a positive and nurturing environment. Our son is always excited to go to school and comes home full of stories about what he learned.",
     image: "https://img.freepik.com/free-photo/young-beautiful-woman-smiling-posing-purple-wall_176420-2852.jpg?w=740",
   },
   {
@@ -26,7 +26,7 @@ const testimonials = [
     name: "Emily Rodriguez",
     role: "Parent",
     quote:
-      "The individualized attention my twins receive at Kid's Promising Tomorrow is remarkable. The teachers truly understand each child's unique needs and learning style. I've recommended this school to all my friends with young children.",
+      "The individualized attention my twins receive at Little Market Nursery is remarkable. The teachers truly understand each child's unique needs and learning style. I've recommended this school to all my friends with young children.",
     image: "https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=740",
   },
 ]
@@ -48,7 +48,7 @@ export default function TestimonialsSection() {
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">What Parents Say</h2>
           <p className="max-w-3xl mx-auto">
-            Hear from our community of parents about their experiences with Kid&apos;s Promising Tomorrow.
+            Hear from our community of parents about their experiences with Little Market Nursery & School Club.
           </p>
         </div>
 

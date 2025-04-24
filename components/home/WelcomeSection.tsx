@@ -8,10 +8,10 @@ export default function WelcomeSection() {
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="order-2 md:order-1">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#3aa756]">
-              Welcome to Kid&apos;s Promising Tomorrow
+              Welcome to Little Market Nursery & Shcool Club
             </h2>
             <p className="text-gray-700 mb-6 text-lg">
-              At Kid&apos;s Promising Tomorrow, we believe every child deserves the best start in life. Our nurturing
+              At Little Market Nursery, we believe every child deserves the best start in life. Our nurturing
               environment encourages curiosity, creativity, and confidence in young learners.
             </p>
             <p className="text-gray-700 mb-8 text-lg">
