@@ -7,7 +7,7 @@ export default function OurProspectusPage() {
       <h1 className="text-3xl font-bold text-[#3aa756] mb-6">Our Prospectus</h1>
 
       <p className="text-lg mb-8">
-        Our prospectus provides comprehensive information about Kid&apos;s Promising Tomorrow, including our educational
+        Our prospectus provides comprehensive information about Little Market Nursery, including our educational
         philosophy, curriculum, daily routines, and practical information for parents. Download our prospectus to learn
         more about what we offer and how we can support your child&apos;s early development.
       </p>
@@ -18,7 +18,7 @@ export default function OurProspectusPage() {
             <FileText size={100} className="text-[#3aa756]" />
           </div>
           <div className="md:w-3/4">
-            <h2 className="text-2xl font-bold text-[#3aa756] mb-3">Kid&apos;s Promising Tomorrow Prospectus 2025</h2>
+            <h2 className="text-2xl font-bold text-[#3aa756] mb-3">Little Market Nursery Prospectus 2025</h2>
             <p className="text-gray-700 mb-6">
               Our latest prospectus contains detailed information about our programs, facilities, staff, and enrollment
               procedures. It also includes testimonials from parents and answers to frequently asked questions.

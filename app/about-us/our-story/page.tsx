@@ -5,7 +5,7 @@ export default function OurStoryPage() {
   
         <div className="prose max-w-none">
           <p className="mb-4">
-            Kid&apos;s Promising Tomorrow was established in 2011 with a vision to provide high-quality childcare and
+            Little Market was established in 2011 with a vision to provide high-quality childcare and
             education in a nurturing environment. Our journey began with a small group of dedicated educators who believed
             in creating a space where children could thrive, learn, and grow.
           </p>
@@ -23,7 +23,7 @@ export default function OurStoryPage() {
           </p>
   
           <p>
-            Today, Kid&apos;s Promising Tomorrow stands as a testament to our dedication to excellence in early childhood
+            Today, At Little Market stands as a testament to our dedication to excellence in early childhood
             education. We are proud of our history and excited about our future as we continue to evolve and enhance our
             programs to best serve the children and families in our care.
           </p>

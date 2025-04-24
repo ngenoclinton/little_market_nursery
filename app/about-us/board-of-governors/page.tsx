@@ -4,7 +4,7 @@ export default function BoardOfGovernorsPage() {
         <h1 className="text-3xl font-bold text-[#3aa756] mb-6">Board of Governors</h1>
   
         <p className="text-lg mb-8">
-          Our Board of Governors provides strategic guidance and oversight to ensure Kid&apos;s Promising Tomorrow
+          Our Board of Governors provides strategic guidance and oversight to ensure At Little Market Nursery
           maintains the highest standards of education and care. The board consists of experienced professionals from
           various fields who are committed to our mission and values.
         </p>

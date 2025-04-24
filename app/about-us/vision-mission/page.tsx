@@ -1,62 +1,96 @@
 export default function VisionMissionPage() {
-    return (
-      <div>
-        <h1 className="text-3xl font-bold text-[#3aa756] mb-6">Vision & Mission</h1>
-  
-        <div className="prose max-w-none">
-          <div className="bg-[#fcb900]/10 bg-opacity-10 p-6 rounded-lg mb-8 border-l-4 border-[#fcb900]">
-            <h2 className="text-2xl font-bold text-[#ff6900] mb-2">Our Vision</h2>
-            <p className="text-lg">
-              To be a leading early childhood education provider where every child is empowered to reach their full
-              potential in a safe, nurturing, and stimulating environment.
+  return (
+    <div>
+      <h1 className="text-3xl font-bold text-[#3aa756] mb-6">Vision & Mission</h1>
+
+      <div className="prose max-w-none">
+        <div className="bg-[#fcb900]/12 bg-opacity-10 p-6 rounded-lg mb-8 border-l-4 border-[#fcb900]">
+          <h2 className="text-2xl font-bold text-[#ff6900] mb-2">Our Vision</h2>
+          <p className="text-lg">
+            To cultivate a warm, inclusive, and stimulating environment where every child thrives as a happy, confident,
+            and independent learner.
+          </p>
+        </div>
+
+        <div className="bg-[#3aa756]/12  bg-opacity-10 p-6 rounded-lg mb-8 border-l-4 border-[#3aa756]">
+          <h2 className="text-2xl font-bold text-[#3aa756] mb-2">Our Mission</h2>
+          <ul className="list-disc pl-5 space-y-2 text-lg">
+            <li>Provide a safe and caring atmosphere that supports early childhood development</li>
+            <li>Celebrate each child's individuality</li>
+            <li>Partner with families to ensure children reach their full potential</li>
+          </ul>
+        </div>
+
+        <h2 className="text-2xl font-bold text-[#3aa756] mb-4">Our Core Values</h2>
+
+        <div className="grid md:grid-cols-2 gap-6">
+          <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+            <h3 className="text-xl font-bold text-[#3aa756] mb-2">Respect and Inclusivity</h3>
+            <p>
+              We value each child and family's unique background, culture, and perspective, creating an environment
+              where everyone feels welcome and respected.
             </p>
           </div>
-  
-          <div className="bg-[#3aa756]/10 bg-opacity-10 p-6 rounded-lg mb-8 border-l-4 border-[#3aa756]">
-            <h2 className="text-2xl font-bold text-[#3aa756] mb-2">Our Mission</h2>
-            <p className="text-lg">
-              To provide high-quality childcare and education that promotes the physical, social, emotional, and cognitive
-              development of each child through play-based learning and individualized attention.
+
+          <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+            <h3 className="text-xl font-bold text-[#3aa756] mb-2">Individuality and Creativity</h3>
+            <p>
+              We encourage children to express themselves, explore their interests, and develop their unique talents and
+              abilities.
             </p>
           </div>
-  
-          <h2 className="text-2xl font-bold text-[#3aa756] mb-4">Our Core Values</h2>
-  
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
-              <h3 className="text-xl font-bold text-[#3aa756] mb-2">Excellence</h3>
+
+          <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+            <h3 className="text-xl font-bold text-[#3aa756] mb-2">Safety and Nurture</h3>
+            <p>
+              We provide a secure, caring environment where children feel protected, supported, and free to learn and
+              grow.
+            </p>
+          </div>
+
+          <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+            <h3 className="text-xl font-bold text-[#3aa756] mb-2">Confidence and Communication</h3>
+            <p>
+              We help children develop self-assurance and effective communication skills that will serve them throughout
+              their lives.
+            </p>
+          </div>
+        </div>
+
+        <h2 className="text-2xl font-bold text-[#3aa756] mt-8 mb-4">British Values</h2>
+
+        <div className="bg-white p-6 rounded-lg shadow-md mb-8">
+          <p className="mb-4">
+            At Little Market Nursery, we actively promote fundamental British values throughout our curriculum and daily
+            activities:
+          </p>
+
+          <div className="space-y-4">
+            <div className="bg-gray-50 p-4 rounded-lg border-l-4 border-[#3aa756]">
+              <h3 className="font-bold text-[#3aa756]">Democracy</h3>
+              <p>Encouraging children to make choices and decisions, and respecting their voices and opinions.</p>
+            </div>
+
+            <div className="bg-gray-50 p-4 rounded-lg border-l-4 border-[#ff6900]">
+              <h3 className="font-bold text-[#ff6900]">Rule of Law</h3>
+              <p>Teaching children about boundaries, rules, and why they are important for our safety and wellbeing.</p>
+            </div>
+
+            <div className="bg-gray-50 p-4 rounded-lg border-l-4 border-[#fcb900]">
+              <h3 className="font-bold text-[#fcb900]">Individual Liberty</h3>
               <p>
-                We strive for excellence in all aspects of our service, continuously improving our practices and programs
-                to provide the best possible care and education.
+                Supporting children to develop a positive sense of themselves and providing opportunities for personal
+                growth.
               </p>
             </div>
-  
-            <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
-              <h3 className="text-xl font-bold text-[#3aa756] mb-2">Respect</h3>
-              <p>
-                We respect each child as a unique individual with their own strengths, interests, and learning styles,
-                valuing diversity and promoting inclusion.
-              </p>
-            </div>
-  
-            <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
-              <h3 className="text-xl font-bold text-[#3aa756] mb-2">Collaboration</h3>
-              <p>
-                We work in partnership with families and the community to create a supportive network that enhances each
-                child&apos;s learning journey.
-              </p>
-            </div>
-  
-            <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
-              <h3 className="text-xl font-bold text-[#3aa756] mb-2">Innovation</h3>
-              <p>
-                We embrace innovative approaches to early childhood education, incorporating research-based practices and
-                creative teaching methods.
-              </p>
+
+            <div className="bg-gray-50 p-4 rounded-lg border-l-4 border-[#df2020]">
+              <h3 className="font-bold text-[#df2020]">Mutual Respect and Tolerance</h3>
+              <p>Celebrating diversity, teaching children to appreciate different cultures, traditions, and beliefs.</p>
             </div>
           </div>
         </div>
       </div>
-    )
-  }
-  
+    </div>
+  )
+}

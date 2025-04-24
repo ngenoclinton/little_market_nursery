@@ -15,7 +15,7 @@ export default function Home() {
       <PreLoader />
       <HomeHero />
 
-      <FloatingInfoCards />
+      {/* <FloatingInfoCards /> */}
       <AgeGroupPrograms />
 
       <WelcomeSection />

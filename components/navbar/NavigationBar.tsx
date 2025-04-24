@@ -105,7 +105,7 @@ const Navbar = () => {
               >
                 <Mail size={20} />
               </button>
-              <button
+              {/* <button
                 className="flex items-center justify-center w-10 h-10 bg-[#3aa756] text-white rounded-none hover:bg-[#2d8444] transition-colors"
                 aria-label="Search"
               >
@@ -116,7 +116,7 @@ const Navbar = () => {
                 aria-label="Language"
               >
                 <Globe size={20} />
-              </button>
+              </button> */}
             </div>
 
             {/* Mobile Menu Button */}
@@ -130,7 +130,7 @@ const Navbar = () => {
       </div>
 
       {/* Main Navigation */}
-      <div className="bg-[#3aa756] text-white">
+      <div className="bg-[#3aa756] px-20 text-white">
         <div className="container mx-auto">
           {/* Desktop Navigation */}
           <nav className="hidden md:block">
@@ -199,12 +199,12 @@ const Navbar = () => {
                 <Link
                   href="/curriculum"
                   className={`block px-4 py-4 text-center hover:bg-[#2d8444] transition-colors relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-1 after:bg-white after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 ${
-                    pathname === "/curriculum" ? "after:scale-x-100 bg-[#2d8444]" : ""
+                    pathname.startsWith("/curriculum") ? "after:scale-x-100 bg-[#2d8444]" : ""
                   }`}
                 >
                   Curriculum
                 </Link>
-                <div className="dropdown-menu absolute left-0 top-full bg-white shadow-md min-w-[200px] hidden group-hover:block z-10 animate-fadeIn">
+                <div className="dropdown-menu absolute left-0 top-full bg-white shadow-md min-w-[200px] hidden group-hover:block z-10 animate-fadeIn max-h-[300px] overflow-y-auto">
                   <Link
                     href="/curriculum/our-approach"
                     className="block py-3 px-4 text-[#3aa756] hover:bg-gray-100 hover:text-[#2d8444] border-b border-gray-200"
@@ -234,6 +234,12 @@ const Navbar = () => {
                     className="block py-3 px-4 text-[#3aa756] hover:bg-gray-100 hover:text-[#2d8444] border-b border-gray-200"
                   >
                     After School Club
+                  </Link>
+                  <Link
+                    href="/curriculum/holiday-club"
+                    className="block py-3 px-4 text-[#3aa756] hover:bg-gray-100 hover:text-[#2d8444] border-b border-gray-200"
+                  >
+                    Holiday Club
                   </Link>
                   <Link
                     href="/curriculum/learning-tools"
@@ -271,7 +277,7 @@ const Navbar = () => {
                 >
                   Key Information
                 </Link>
-                <div className="dropdown-menu absolute left-0 top-full bg-white shadow-md min-w-[200px] hidden group-hover:block z-10 animate-fadeIn">
+                <div className="dropdown-menu absolute left-0 top-full bg-white shadow-md min-w-[200px] hidden group-hover:block z-10 animate-fadeIn max-h-[300px] overflow-y-auto">
                   <Link
                     href="/key-info/admissions"
                     className="block py-3 px-4 text-[#3aa756] hover:bg-gray-100 hover:text-[#2d8444] border-b border-gray-200"
@@ -315,12 +321,12 @@ const Navbar = () => {
                 <Link
                   href="/gallery"
                   className={`block px-4 py-4 text-center hover:bg-[#2d8444] transition-colors relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-1 after:bg-white after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 ${
-                    pathname === "/gallery" ? "after:scale-x-100 bg-[#2d8444]" : ""
+                    pathname.startsWith("/gallery") ? "after:scale-x-100 bg-[#2d8444]" : ""
                   }`}
                 >
                   Galleries
                 </Link>
-                <div className="dropdown-menu absolute left-0 top-full bg-white shadow-md min-w-[200px] hidden group-hover:block z-10 animate-fadeIn">
+                <div className="dropdown-menu absolute left-0 top-full bg-white shadow-md min-w-[200px] hidden group-hover:block z-10 animate-fadeIn max-h-[300px] overflow-y-auto">
                   <Link
                     href="/gallery/baby-gallery"
                     className="block py-3 px-4 text-[#3aa756] hover:bg-gray-100 hover:text-[#2d8444] border-b border-gray-200"
@@ -335,7 +341,7 @@ const Navbar = () => {
                   </Link>
                   <Link
                     href="/gallery/tots-gallery"
-                    className="block py-3 px-4 text-[#3aa756] hover:bg-gray-100 hover:text-[#2d8444]"
+                    className="block py-3 px-4 text-[#3aa756] hover:bg-gray-100 hover:text-[#2d8444] border-b border-gray-200"
                   >
                     Tots Gallery
                   </Link>
@@ -350,31 +356,36 @@ const Navbar = () => {
 
               <li className="nav-item relative group">
                 <Link
-                  href="/policies"
+                  href="/funding"
                   className={`block px-4 py-4 text-center hover:bg-[#2d8444] transition-colors relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-1 after:bg-white after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 ${
-                    pathname === "/policies" ? "after:scale-x-100 bg-[#2d8444]" : ""
+                    pathname === "/funding" ? "after:scale-x-100 bg-[#2d8444]" : ""
                   }`}
                 >
-                  Policies
+                  Funding
+                </Link>
+              </li>
+
+              <li className="nav-item relative group">
+                <Link
+                  href="/holiday-club"
+                  className={`block px-4 py-4 text-center hover:bg-[#2d8444] transition-colors relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-1 after:bg-white after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 ${
+                    pathname.startsWith("/holiday-club") ? "after:scale-x-100 bg-[#2d8444]" : ""
+                  }`}
+                >
+                  Holiday Club
                 </Link>
                 <div className="dropdown-menu absolute left-0 top-full bg-white shadow-md min-w-[200px] hidden group-hover:block z-10 animate-fadeIn">
                   <Link
-                    href="/policies/attendance"
+                    href="/holiday-club"
                     className="block py-3 px-4 text-[#3aa756] hover:bg-gray-100 hover:text-[#2d8444] border-b border-gray-200"
                   >
-                    Attendance
+                    Information
                   </Link>
                   <Link
-                    href="/policies/behavior"
-                    className="block py-3 px-4 text-[#3aa756] hover:bg-gray-100 hover:text-[#2d8444] border-b border-gray-200"
-                  >
-                    Behavior
-                  </Link>
-                  <Link
-                    href="/policies/health"
+                    href="/holiday-club/gallery"
                     className="block py-3 px-4 text-[#3aa756] hover:bg-gray-100 hover:text-[#2d8444]"
                   >
-                    Health & Safety
+                    Gallery
                   </Link>
                 </div>
               </li>
@@ -383,11 +394,37 @@ const Navbar = () => {
                 <Link
                   href="/contact"
                   className={`block px-4 py-4 text-center hover:bg-[#2d8444] transition-colors relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-1 after:bg-white after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 ${
-                    pathname === "/contact" ? "after:scale-x-100 bg-[#2d8444]" : ""
+                    pathname.startsWith("/contact") ? "after:scale-x-100 bg-[#2d8444]" : ""
                   }`}
                 >
-                  Contact Details
+                  Contact Us
                 </Link>
+                <div className="dropdown-menu absolute left-0 top-full bg-white shadow-md min-w-[200px] hidden group-hover:block z-10 animate-fadeIn max-h-[300px] overflow-y-auto">
+                  <Link
+                    href="/contact/arrange-visit"
+                    className="block py-3 px-4 text-[#3aa756] hover:bg-gray-100 hover:text-[#2d8444] border-b border-gray-200"
+                  >
+                    Arrange a Visit
+                  </Link>
+                  <Link
+                    href="/contact/ask-question"
+                    className="block py-3 px-4 text-[#3aa756] hover:bg-gray-100 hover:text-[#2d8444] border-b border-gray-200"
+                  >
+                    Ask A Question
+                  </Link>
+                  <Link
+                    href="/contact/register-your-child"
+                    className="block py-3 px-4 text-[#3aa756] hover:bg-gray-100 hover:text-[#2d8444] border-b border-gray-200"
+                  >
+                    Register Your Child
+                  </Link>
+                  <Link
+                    href="/contact/find-us"
+                    className="block py-3 px-4 text-[#3aa756] hover:bg-gray-100 hover:text-[#2d8444]"
+                  >
+                    Find Us
+                  </Link>
+                </div>
               </li>
             </ul>
           </nav>
@@ -415,7 +452,7 @@ const Navbar = () => {
           </button>
         </div>
 
-        <nav className="p-4">
+        <nav className="p-4 overflow-y-auto" style={{ maxHeight: "calc(100vh - 80px)" }}>
           <ul className="space-y-1">
             <li>
               <Link
@@ -559,6 +596,14 @@ const Navbar = () => {
                 </li>
                 <li>
                   <Link
+                    href="/curriculum/holiday-club"
+                    className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
+                  >
+                    Holiday Club
+                  </Link>
+                </li>
+                <li>
+                  <Link
                     href="/curriculum/learning-tools"
                     className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
                   >
@@ -669,7 +714,7 @@ const Navbar = () => {
                 } hover:text-[#3aa756] hover:bg-gray-50 rounded-md cursor-pointer`}
                 onClick={() => toggleDropdown("gallery")}
               >
-                <span>Gallery</span>
+                <span>Galleries</span>
                 {activeDropdowns["gallery"] ? (
                   <ChevronDown className="h-5 w-5 transition-transform duration-200" />
                 ) : (
@@ -682,27 +727,25 @@ const Navbar = () => {
                 }`}
               >
                 <li>
-                <Link
+                  <Link
                     href="/gallery/baby-gallery"
-                    className="block py-3 px-4 text-[#3aa756] hover:bg-gray-100 hover:text-[#2d8444] border-b border-gray-200"
+                    className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
                   >
                     Baby Gallery
                   </Link>
-                  
                 </li>
                 <li>
-                <Link
+                  <Link
                     href="/gallery/pre-school-gallery"
-                    className="block py-3 px-4 text-[#3aa756] hover:bg-gray-100 hover:text-[#2d8444] border-b border-gray-200"
+                    className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
                   >
                     Pre-School Gallery
                   </Link>
-                  
                 </li>
                 <li>
-                <Link
+                  <Link
                     href="/gallery/tots-gallery"
-                    className="block py-3 px-4 text-[#3aa756] hover:bg-gray-100 hover:text-[#2d8444]"
+                    className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
                   >
                     Tots Gallery
                   </Link>
@@ -710,7 +753,7 @@ const Navbar = () => {
                 <li>
                   <Link
                     href="/gallery/activity-gallery"
-                    className="block py-3 px-4 text-[#3aa756] hover:bg-gray-100 hover:text-[#2d8444]"
+                    className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
                   >
                     Activity Gallery
                   </Link>
@@ -719,14 +762,25 @@ const Navbar = () => {
             </li>
 
             <li className="border-b border-gray-100">
+              <Link
+                href="/funding"
+                className={`block py-3 px-4 text-lg font-medium ${
+                  pathname === "/funding" ? "text-[#3aa756] bg-gray-100" : "text-gray-800"
+                } hover:text-[#3aa756] hover:bg-gray-50 rounded-md`}
+              >
+                Funding
+              </Link>
+            </li>
+
+            <li className="border-b border-gray-100">
               <div
                 className={`flex justify-between items-center py-3 px-4 text-lg font-medium ${
-                  pathname.startsWith("/policies") ? "text-[#3aa756] bg-gray-100" : "text-gray-800"
+                  pathname.startsWith("/holiday-club") ? "text-[#3aa756] bg-gray-100" : "text-gray-800"
                 } hover:text-[#3aa756] hover:bg-gray-50 rounded-md cursor-pointer`}
-                onClick={() => toggleDropdown("policies")}
+                onClick={() => toggleDropdown("holiday-club")}
               >
-                <span>Policies</span>
-                {activeDropdowns["policies"] ? (
+                <span>Holiday Club</span>
+                {activeDropdowns["holiday-club"] ? (
                   <ChevronDown className="h-5 w-5 transition-transform duration-200" />
                 ) : (
                   <ChevronRight className="h-5 w-5 transition-transform duration-200" />
@@ -734,45 +788,80 @@ const Navbar = () => {
               </div>
               <ul
                 className={`pl-4 mt-1 space-y-1 overflow-hidden transition-all duration-300 ${
-                  activeDropdowns["policies"] ? "max-h-60" : "max-h-0"
+                  activeDropdowns["holiday-club"] ? "max-h-60" : "max-h-0"
                 }`}
               >
                 <li>
                   <Link
-                    href="/policies/attendance"
+                    href="/holiday-club"
                     className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
                   >
-                    Attendance
+                    Information
                   </Link>
                 </li>
                 <li>
                   <Link
-                    href="/policies/behavior"
+                    href="/holiday-club/gallery"
                     className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
                   >
-                    Behavior
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/policies/health"
-                    className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
-                  >
-                    Health & Safety
+                    Gallery
                   </Link>
                 </li>
               </ul>
             </li>
 
-            <li>
-              <Link
-                href="/contact"
-                className={`block py-3 px-4 text-lg font-medium ${
-                  pathname === "/contact" ? "text-[#3aa756] bg-gray-100" : "text-gray-800"
-                } hover:text-[#3aa756] hover:bg-gray-50 rounded-md`}
+            <li className="border-b border-gray-100">
+              <div
+                className={`flex justify-between items-center py-3 px-4 text-lg font-medium ${
+                  pathname.startsWith("/contact") ? "text-[#3aa756] bg-gray-100" : "text-gray-800"
+                } hover:text-[#3aa756] hover:bg-gray-50 rounded-md cursor-pointer`}
+                onClick={() => toggleDropdown("contact")}
               >
-                Contact Details
-              </Link>
+                <span>Contact Us</span>
+                {activeDropdowns["contact"] ? (
+                  <ChevronDown className="h-5 w-5 transition-transform duration-200" />
+                ) : (
+                  <ChevronRight className="h-5 w-5 transition-transform duration-200" />
+                )}
+              </div>
+              <ul
+                className={`pl-4 mt-1 space-y-1 overflow-hidden transition-all duration-300 ${
+                  activeDropdowns["contact"] ? "max-h-60" : "max-h-0"
+                }`}
+              >
+                <li>
+                  <Link
+                    href="/contact/arrange-visit"
+                    className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
+                  >
+                    Arrange a Visit
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/contact/ask-question"
+                    className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
+                  >
+                    Ask A Question
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/contact/register-your-child"
+                    className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
+                  >
+                    Register Your Child
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/contact/find-us"
+                    className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
+                  >
+                    Find Us
+                  </Link>
+                </li>
+              </ul>
             </li>
           </ul>
         </nav>

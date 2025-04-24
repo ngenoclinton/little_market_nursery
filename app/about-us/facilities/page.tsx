@@ -33,7 +33,7 @@ export default function FacilitiesPage() {
       <h1 className="text-3xl font-bold text-[#3aa756] mb-6">Our Facilities</h1>
 
       <p className="text-lg mb-8">
-        Kid&apos;s Promising Tomorrow is housed in a purpose-designed facility that provides a safe, stimulating, and
+      At Little Market is housed in a purpose-designed facility that provides a safe, stimulating, and
         comfortable environment for children to learn and grow. Our spaces are thoughtfully created to support various
         aspects of early childhood development.
       </p>
