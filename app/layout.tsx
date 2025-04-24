@@ -11,7 +11,7 @@ const quicksand = Quicksand({
 })
 
 export const metadata: Metadata = {
-  title: "Kid's Promising Tomorrow - Nurturing Young Minds",
+  title: "Little Market Nursery- Nurturing Young Minds",
   description: "A nurturing environment for children to learn, grow, and thrive.",
 }
 
