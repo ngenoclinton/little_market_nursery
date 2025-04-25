@@ -75,7 +75,7 @@ export default function HolidayClubPage() {
         </div>
         <div className="relative h-[400px] rounded-lg overflow-hidden shadow-lg">
           <Image
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-vSqYKCJLmO0th8hwSE8WYiqT0XrF92.png"
+            src="/galleries/school-club-images/holiday-club/camp.png"
             alt="Holiday Club Promotional Image"
             fill
             className="object-cover"
@@ -255,7 +255,7 @@ export default function HolidayClubPage() {
         )}
       </div>
 
-      <div className="mb-12">
+      {/* <div className="mb-12">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-bold text-[#3aa756]">Gallery of Club Activities</h2>
           <Link href="/holiday-club/gallery" className="text-[#3aa756] hover:text-[#2d8444] font-medium">
@@ -275,7 +275,7 @@ export default function HolidayClubPage() {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
 
       <div className="bg-white p-8 rounded-lg shadow-md mb-12">
         <div className="flex items-center mb-6">

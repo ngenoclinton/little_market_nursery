@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { MapPin, Phone, Mail, Search, Globe, Menu, X, ChevronRight, ChevronDown } from "lucide-react"
@@ -12,6 +12,7 @@ const Navbar = () => {
   const [activeDropdowns, setActiveDropdowns] = useState<Record<string, boolean>>({})
   const [contactBanner, setContactBanner] = useState<string | null>(null)
   const pathname = usePathname()
+  const mobileNavRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,6 +25,10 @@ const Navbar = () => {
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen)
+    // Reset all dropdowns when closing the menu
+    if (mobileMenuOpen) {
+      setActiveDropdowns({})
+    }
   }
 
   const toggleDropdown = (key: string) => {
@@ -47,6 +52,14 @@ const Navbar = () => {
       default:
         setContactBanner(null)
     }
+  }
+
+  const handleMobileLinkClick = () => {
+    setMobileMenuOpen(false)
+    // Reset all dropdowns
+    setActiveDropdowns({})
+    // Scroll to top of the page
+    window.scrollTo(0, 0)
   }
 
   return (
@@ -105,7 +118,7 @@ const Navbar = () => {
               >
                 <Mail size={20} />
               </button>
-              {/* <button
+              <button
                 className="flex items-center justify-center w-10 h-10 bg-[#3aa756] text-white rounded-none hover:bg-[#2d8444] transition-colors"
                 aria-label="Search"
               >
@@ -116,12 +129,16 @@ const Navbar = () => {
                 aria-label="Language"
               >
                 <Globe size={20} />
-              </button> */}
+              </button>
             </div>
 
             {/* Mobile Menu Button */}
             <div className="md:hidden">
-              <button className="p-2 text-[#3aa756] focus:outline-none" aria-label="Menu" onClick={toggleMobileMenu}>
+              <button
+                className="p-2 text-[#3aa756] focus:outline-none mobile-menu-button"
+                aria-label="Menu"
+                onClick={toggleMobileMenu}
+              >
                 {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
               </button>
             </div>
@@ -130,7 +147,7 @@ const Navbar = () => {
       </div>
 
       {/* Main Navigation */}
-      <div className="bg-[#3aa756] px-20 text-white">
+      <div className="bg-[#3aa756] text-white">
         <div className="container mx-auto">
           {/* Desktop Navigation */}
           <nav className="hidden md:block">
@@ -433,13 +450,15 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`md:hidden fixed inset-0 bg-white z-50 transform transition-transform duration-300 ease-in-out ${
+        className={`md:hidden fixed inset-0 bg-white z-50 transform transition-transform duration-300 ease-in-out flex flex-col ${
           mobileMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
         style={{ top: "0", height: "100vh" }}
+        ref={mobileNavRef}
       >
-        <div className="flex justify-between items-center p-4 border-b">
-          <Link href="/" className="flex items-center">
+        {/* Mobile Header */}
+        <div className="flex justify-between items-center p-4 border-b flex-shrink-0">
+          <Link href="/" className="flex items-center" onClick={handleMobileLinkClick}>
             <div className="relative w-12 h-12 mr-2">
               <Image src="/Nursery-logo.png" alt="School Logo" fill className="object-contain" />
             </div>
@@ -447,426 +466,464 @@ const Navbar = () => {
               Little Market <span className="text-[#df2020]">Nursery</span>
             </h1>
           </Link>
-          <button className="p-2 text-[#df2020]" onClick={toggleMobileMenu} aria-label="Close menu">
+          <button className="p-2 text-[#df2020] mobile-menu-button" onClick={toggleMobileMenu} aria-label="Close menu">
             <X size={24} />
           </button>
         </div>
 
-        <nav className="p-4 overflow-y-auto" style={{ maxHeight: "calc(100vh - 80px)" }}>
-          <ul className="space-y-1">
-            <li>
-              <Link
-                href="/"
-                className={`block py-3 px-4 text-lg font-medium ${
-                  pathname === "/" ? "text-[#3aa756] bg-gray-100" : "text-gray-800"
-                } hover:text-[#3aa756] hover:bg-gray-50 rounded-md`}
-              >
-                Home
-              </Link>
-            </li>
+        {/* Scrollable Navigation Area */}
+        <div className="flex-grow overflow-hidden">
+          <nav className="h-full overflow-y-auto custom-scrollbar p-4">
+            <ul className="space-y-1">
+              <li>
+                <Link
+                  href="/"
+                  className={`block py-3 px-4 text-lg font-medium ${
+                    pathname === "/" ? "text-[#3aa756] bg-gray-100" : "text-gray-800"
+                  } hover:text-[#3aa756] hover:bg-gray-50 rounded-md`}
+                  onClick={handleMobileLinkClick}
+                >
+                  Home
+                </Link>
+              </li>
 
-            <li className="border-b border-gray-100">
-              <div
-                className={`flex justify-between items-center py-3 px-4 text-lg font-medium ${
-                  pathname.startsWith("/about-us") ? "text-[#3aa756] bg-gray-100" : "text-gray-800"
-                } hover:text-[#3aa756] hover:bg-gray-50 rounded-md cursor-pointer`}
-                onClick={() => toggleDropdown("about")}
-              >
-                <span>About Us</span>
-                {activeDropdowns["about"] ? (
-                  <ChevronDown className="h-5 w-5 transition-transform duration-200" />
-                ) : (
-                  <ChevronRight className="h-5 w-5 transition-transform duration-200" />
-                )}
-              </div>
-              <ul
-                className={`pl-4 mt-1 space-y-1 overflow-hidden transition-all duration-300 ${
-                  activeDropdowns["about"] ? "max-h-60" : "max-h-0"
-                }`}
-              >
-                <li>
-                  <Link
-                    href="/about-us/our-story"
-                    className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
-                  >
-                    Our Story
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/about-us/vision-mission"
-                    className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
-                  >
-                    Vision & Mission
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/about-us/our-team"
-                    className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
-                  >
-                    Our Team
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/about-us/facilities"
-                    className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
-                  >
-                    Facilities
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/about-us/board-of-governors"
-                    className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
-                  >
-                    Board of Governors
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/about-us/our-prospectus"
-                    className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
-                  >
-                    Our Prospectus
-                  </Link>
-                </li>
-              </ul>
-            </li>
+              <li className="border-b border-gray-100">
+                <div
+                  className={`flex justify-between items-center py-3 px-4 text-lg font-medium ${
+                    pathname.startsWith("/about-us") ? "text-[#3aa756] bg-gray-100" : "text-gray-800"
+                  } hover:text-[#3aa756] hover:bg-gray-50 rounded-md cursor-pointer`}
+                  onClick={() => toggleDropdown("about")}
+                >
+                  <span>About Us</span>
+                  {activeDropdowns["about"] ? (
+                    <ChevronDown className="h-5 w-5 transition-transform duration-200" />
+                  ) : (
+                    <ChevronRight className="h-5 w-5 transition-transform duration-200" />
+                  )}
+                </div>
+                <ul
+                  className={`pl-4 mt-1 space-y-1 overflow-hidden transition-all duration-300 custom-scrollbar ${
+                    activeDropdowns["about"] ? "max-h-60 overflow-y-auto" : "max-h-0"
+                  }`}
+                >
+                  <li>
+                    <Link
+                      href="/about-us/our-story"
+                      className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
+                      onClick={handleMobileLinkClick}
+                    >
+                      Our Story
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/about-us/vision-mission"
+                      className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
+                      onClick={handleMobileLinkClick}
+                    >
+                      Vision & Mission
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/about-us/our-team"
+                      className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
+                      onClick={handleMobileLinkClick}
+                    >
+                      Our Team
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/about-us/facilities"
+                      className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
+                      onClick={handleMobileLinkClick}
+                    >
+                      Facilities
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/about-us/board-of-governors"
+                      className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
+                      onClick={handleMobileLinkClick}
+                    >
+                      Board of Governors
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/about-us/our-prospectus"
+                      className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
+                      onClick={handleMobileLinkClick}
+                    >
+                      Our Prospectus
+                    </Link>
+                  </li>
+                </ul>
+              </li>
 
-            <li className="border-b border-gray-100">
-              <div
-                className={`flex justify-between items-center py-3 px-4 text-lg font-medium ${
-                  pathname.startsWith("/curriculum") ? "text-[#3aa756] bg-gray-100" : "text-gray-800"
-                } hover:text-[#3aa756] hover:bg-gray-50 rounded-md cursor-pointer`}
-                onClick={() => toggleDropdown("curriculum")}
-              >
-                <span>Curriculum</span>
-                {activeDropdowns["curriculum"] ? (
-                  <ChevronDown className="h-5 w-5 transition-transform duration-200" />
-                ) : (
-                  <ChevronRight className="h-5 w-5 transition-transform duration-200" />
-                )}
-              </div>
-              <ul
-                className={`pl-4 mt-1 space-y-1 overflow-hidden transition-all duration-300 ${
-                  activeDropdowns["curriculum"] ? "max-h-96" : "max-h-0"
-                }`}
-              >
-                <li>
-                  <Link
-                    href="/curriculum/our-approach"
-                    className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
-                  >
-                    Our Approach
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/curriculum/babies"
-                    className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
-                  >
-                    0–2 Years (Babies)
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/curriculum/toddlers"
-                    className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
-                  >
-                    2–3 Years (Toddlers)
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/curriculum/preschoolers"
-                    className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
-                  >
-                    3–5 Years (Preschoolers)
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/curriculum/after-school-club"
-                    className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
-                  >
-                    After School Club
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/curriculum/holiday-club"
-                    className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
-                  >
-                    Holiday Club
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/curriculum/learning-tools"
-                    className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
-                  >
-                    Learning Tools
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/curriculum/assessments"
-                    className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
-                  >
-                    Assessments
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/curriculum/learning-support"
-                    className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
-                  >
-                    Learning Support
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/curriculum/extra-activities"
-                    className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
-                  >
-                    Extra Activities
-                  </Link>
-                </li>
-              </ul>
-            </li>
+              <li className="border-b border-gray-100">
+                <div
+                  className={`flex justify-between items-center py-3 px-4 text-lg font-medium ${
+                    pathname.startsWith("/curriculum") ? "text-[#3aa756] bg-gray-100" : "text-gray-800"
+                  } hover:text-[#3aa756] hover:bg-gray-50 rounded-md cursor-pointer`}
+                  onClick={() => toggleDropdown("curriculum")}
+                >
+                  <span>Curriculum</span>
+                  {activeDropdowns["curriculum"] ? (
+                    <ChevronDown className="h-5 w-5 transition-transform duration-200" />
+                  ) : (
+                    <ChevronRight className="h-5 w-5 transition-transform duration-200" />
+                  )}
+                </div>
+                <ul
+                  className={`pl-4 mt-1 space-y-1 overflow-hidden transition-all duration-300 custom-scrollbar ${
+                    activeDropdowns["curriculum"] ? "max-h-[40vh] overflow-y-auto pb-2" : "max-h-0"
+                  }`}
+                >
+                  <li>
+                    <Link
+                      href="/curriculum/our-approach"
+                      className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
+                      onClick={handleMobileLinkClick}
+                    >
+                      Our Approach
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/curriculum/babies"
+                      className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
+                      onClick={handleMobileLinkClick}
+                    >
+                      0–2 Years (Babies)
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/curriculum/toddlers"
+                      className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
+                      onClick={handleMobileLinkClick}
+                    >
+                      2–3 Years (Toddlers)
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/curriculum/preschoolers"
+                      className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
+                      onClick={handleMobileLinkClick}
+                    >
+                      3–5 Years (Preschoolers)
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/curriculum/after-school-club"
+                      className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
+                      onClick={handleMobileLinkClick}
+                    >
+                      After School Club
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/curriculum/holiday-club"
+                      className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
+                      onClick={handleMobileLinkClick}
+                    >
+                      Holiday Club
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/curriculum/learning-tools"
+                      className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
+                      onClick={handleMobileLinkClick}
+                    >
+                      Learning Tools
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/curriculum/assessments"
+                      className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
+                      onClick={handleMobileLinkClick}
+                    >
+                      Assessments
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/curriculum/learning-support"
+                      className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
+                      onClick={handleMobileLinkClick}
+                    >
+                      Learning Support
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/curriculum/extra-activities"
+                      className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
+                      onClick={handleMobileLinkClick}
+                    >
+                      Extra Activities
+                    </Link>
+                  </li>
+                </ul>
+              </li>
 
-            <li className="border-b border-gray-100">
-              <div
-                className={`flex justify-between items-center py-3 px-4 text-lg font-medium ${
-                  pathname.startsWith("/key-info") ? "text-[#3aa756] bg-gray-100" : "text-gray-800"
-                } hover:text-[#3aa756] hover:bg-gray-50 rounded-md cursor-pointer`}
-                onClick={() => toggleDropdown("key-info")}
-              >
-                <span>Key Information</span>
-                {activeDropdowns["key-info"] ? (
-                  <ChevronDown className="h-5 w-5 transition-transform duration-200" />
-                ) : (
-                  <ChevronRight className="h-5 w-5 transition-transform duration-200" />
-                )}
-              </div>
-              <ul
-                className={`pl-4 mt-1 space-y-1 overflow-hidden transition-all duration-300 ${
-                  activeDropdowns["key-info"] ? "max-h-96" : "max-h-0"
-                }`}
-              >
-                <li>
-                  <Link
-                    href="/key-info/admissions"
-                    className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
-                  >
-                    Admissions
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/key-info/calendar"
-                    className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
-                  >
-                    Calendar
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/key-info/fees-and-funding"
-                    className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
-                  >
-                    Fees & Funding
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/key-info/meals-and-menu"
-                    className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
-                  >
-                    Meals & Menu
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/key-info/transport"
-                    className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
-                  >
-                    Transport
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/key-info/parent-partnership"
-                    className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
-                  >
-                    Parent Partnership
-                  </Link>
-                </li>
-              </ul>
-            </li>
+              <li className="border-b border-gray-100">
+                <div
+                  className={`flex justify-between items-center py-3 px-4 text-lg font-medium ${
+                    pathname.startsWith("/key-info") ? "text-[#3aa756] bg-gray-100" : "text-gray-800"
+                  } hover:text-[#3aa756] hover:bg-gray-50 rounded-md cursor-pointer`}
+                  onClick={() => toggleDropdown("key-info")}
+                >
+                  <span>Key Information</span>
+                  {activeDropdowns["key-info"] ? (
+                    <ChevronDown className="h-5 w-5 transition-transform duration-200" />
+                  ) : (
+                    <ChevronRight className="h-5 w-5 transition-transform duration-200" />
+                  )}
+                </div>
+                <ul
+                  className={`pl-4 mt-1 space-y-1 overflow-hidden transition-all duration-300 custom-scrollbar ${
+                    activeDropdowns["key-info"] ? "max-h-96 overflow-y-auto" : "max-h-0"
+                  }`}
+                >
+                  <li>
+                    <Link
+                      href="/key-info/admissions"
+                      className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
+                      onClick={handleMobileLinkClick}
+                    >
+                      Admissions
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/key-info/calendar"
+                      className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
+                      onClick={handleMobileLinkClick}
+                    >
+                      Calendar
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/key-info/fees-and-funding"
+                      className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
+                      onClick={handleMobileLinkClick}
+                    >
+                      Fees & Funding
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/key-info/meals-and-menu"
+                      className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
+                      onClick={handleMobileLinkClick}
+                    >
+                      Meals & Menu
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/key-info/transport"
+                      className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
+                      onClick={handleMobileLinkClick}
+                    >
+                      Transport
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/key-info/parent-partnership"
+                      className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
+                      onClick={handleMobileLinkClick}
+                    >
+                      Parent Partnership
+                    </Link>
+                  </li>
+                </ul>
+              </li>
 
-            <li className="border-b border-gray-100">
-              <div
-                className={`flex justify-between items-center py-3 px-4 text-lg font-medium ${
-                  pathname.startsWith("/gallery") ? "text-[#3aa756] bg-gray-100" : "text-gray-800"
-                } hover:text-[#3aa756] hover:bg-gray-50 rounded-md cursor-pointer`}
-                onClick={() => toggleDropdown("gallery")}
-              >
-                <span>Galleries</span>
-                {activeDropdowns["gallery"] ? (
-                  <ChevronDown className="h-5 w-5 transition-transform duration-200" />
-                ) : (
-                  <ChevronRight className="h-5 w-5 transition-transform duration-200" />
-                )}
-              </div>
-              <ul
-                className={`pl-4 mt-1 space-y-1 overflow-hidden transition-all duration-300 ${
-                  activeDropdowns["gallery"] ? "max-h-60" : "max-h-0"
-                }`}
-              >
-                <li>
-                  <Link
-                    href="/gallery/baby-gallery"
-                    className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
-                  >
-                    Baby Gallery
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/gallery/pre-school-gallery"
-                    className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
-                  >
-                    Pre-School Gallery
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/gallery/tots-gallery"
-                    className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
-                  >
-                    Tots Gallery
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/gallery/activity-gallery"
-                    className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
-                  >
-                    Activity Gallery
-                  </Link>
-                </li>
-              </ul>
-            </li>
+              <li className="border-b border-gray-100">
+                <div
+                  className={`flex justify-between items-center py-3 px-4 text-lg font-medium ${
+                    pathname.startsWith("/gallery") ? "text-[#3aa756] bg-gray-100" : "text-gray-800"
+                  } hover:text-[#3aa756] hover:bg-gray-50 rounded-md cursor-pointer`}
+                  onClick={() => toggleDropdown("gallery")}
+                >
+                  <span>Galleries</span>
+                  {activeDropdowns["gallery"] ? (
+                    <ChevronDown className="h-5 w-5 transition-transform duration-200" />
+                  ) : (
+                    <ChevronRight className="h-5 w-5 transition-transform duration-200" />
+                  )}
+                </div>
+                <ul
+                  className={`pl-4 mt-1 space-y-1 overflow-hidden transition-all duration-300 custom-scrollbar ${
+                    activeDropdowns["gallery"] ? "max-h-60 overflow-y-auto" : "max-h-0"
+                  }`}
+                >
+                  <li>
+                    <Link
+                      href="/gallery/baby-gallery"
+                      className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
+                      onClick={handleMobileLinkClick}
+                    >
+                      Baby Gallery
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/gallery/pre-school-gallery"
+                      className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
+                      onClick={handleMobileLinkClick}
+                    >
+                      Pre-School Gallery
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/gallery/tots-gallery"
+                      className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
+                      onClick={handleMobileLinkClick}
+                    >
+                      Tots Gallery
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/gallery/activity-gallery"
+                      className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
+                      onClick={handleMobileLinkClick}
+                    >
+                      Activity Gallery
+                    </Link>
+                  </li>
+                </ul>
+              </li>
 
-            <li className="border-b border-gray-100">
-              <Link
-                href="/funding"
-                className={`block py-3 px-4 text-lg font-medium ${
-                  pathname === "/funding" ? "text-[#3aa756] bg-gray-100" : "text-gray-800"
-                } hover:text-[#3aa756] hover:bg-gray-50 rounded-md`}
-              >
-                Funding
-              </Link>
-            </li>
+              <li className="border-b border-gray-100">
+                <Link
+                  href="/funding"
+                  className={`block py-3 px-4 text-lg font-medium ${
+                    pathname === "/funding" ? "text-[#3aa756] bg-gray-100" : "text-gray-800"
+                  } hover:text-[#3aa756] hover:bg-gray-50 rounded-md`}
+                  onClick={handleMobileLinkClick}
+                >
+                  Funding
+                </Link>
+              </li>
 
-            <li className="border-b border-gray-100">
-              <div
-                className={`flex justify-between items-center py-3 px-4 text-lg font-medium ${
-                  pathname.startsWith("/holiday-club") ? "text-[#3aa756] bg-gray-100" : "text-gray-800"
-                } hover:text-[#3aa756] hover:bg-gray-50 rounded-md cursor-pointer`}
-                onClick={() => toggleDropdown("holiday-club")}
-              >
-                <span>Holiday Club</span>
-                {activeDropdowns["holiday-club"] ? (
-                  <ChevronDown className="h-5 w-5 transition-transform duration-200" />
-                ) : (
-                  <ChevronRight className="h-5 w-5 transition-transform duration-200" />
-                )}
-              </div>
-              <ul
-                className={`pl-4 mt-1 space-y-1 overflow-hidden transition-all duration-300 ${
-                  activeDropdowns["holiday-club"] ? "max-h-60" : "max-h-0"
-                }`}
-              >
-                <li>
-                  <Link
-                    href="/holiday-club"
-                    className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
-                  >
-                    Information
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/holiday-club/gallery"
-                    className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
-                  >
-                    Gallery
-                  </Link>
-                </li>
-              </ul>
-            </li>
+              <li className="border-b border-gray-100">
+                <div
+                  className={`flex justify-between items-center py-3 px-4 text-lg font-medium ${
+                    pathname.startsWith("/holiday-club") ? "text-[#3aa756] bg-gray-100" : "text-gray-800"
+                  } hover:text-[#3aa756] hover:bg-gray-50 rounded-md cursor-pointer`}
+                  onClick={() => toggleDropdown("holiday-club")}
+                >
+                  <span>Holiday Club</span>
+                  {activeDropdowns["holiday-club"] ? (
+                    <ChevronDown className="h-5 w-5 transition-transform duration-200" />
+                  ) : (
+                    <ChevronRight className="h-5 w-5 transition-transform duration-200" />
+                  )}
+                </div>
+                <ul
+                  className={`pl-4 mt-1 space-y-1 overflow-hidden transition-all duration-300 custom-scrollbar ${
+                    activeDropdowns["holiday-club"] ? "max-h-60 overflow-y-auto" : "max-h-0"
+                  }`}
+                >
+                  <li>
+                    <Link
+                      href="/holiday-club"
+                      className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
+                      onClick={handleMobileLinkClick}
+                    >
+                      Information
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/holiday-club/gallery"
+                      className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
+                      onClick={handleMobileLinkClick}
+                    >
+                      Gallery
+                    </Link>
+                  </li>
+                </ul>
+              </li>
 
-            <li className="border-b border-gray-100">
-              <div
-                className={`flex justify-between items-center py-3 px-4 text-lg font-medium ${
-                  pathname.startsWith("/contact") ? "text-[#3aa756] bg-gray-100" : "text-gray-800"
-                } hover:text-[#3aa756] hover:bg-gray-50 rounded-md cursor-pointer`}
-                onClick={() => toggleDropdown("contact")}
-              >
-                <span>Contact Us</span>
-                {activeDropdowns["contact"] ? (
-                  <ChevronDown className="h-5 w-5 transition-transform duration-200" />
-                ) : (
-                  <ChevronRight className="h-5 w-5 transition-transform duration-200" />
-                )}
-              </div>
-              <ul
-                className={`pl-4 mt-1 space-y-1 overflow-hidden transition-all duration-300 ${
-                  activeDropdowns["contact"] ? "max-h-60" : "max-h-0"
-                }`}
-              >
-                <li>
-                  <Link
-                    href="/contact/arrange-visit"
-                    className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
-                  >
-                    Arrange a Visit
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/contact/ask-question"
-                    className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
-                  >
-                    Ask A Question
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/contact/register-your-child"
-                    className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
-                  >
-                    Register Your Child
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/contact/find-us"
-                    className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
-                  >
-                    Find Us
-                  </Link>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
+              <li className="border-b border-gray-100">
+                <div
+                  className={`flex justify-between items-center py-3 px-4 text-lg font-medium ${
+                    pathname.startsWith("/contact") ? "text-[#3aa756] bg-gray-100" : "text-gray-800"
+                  } hover:text-[#3aa756] hover:bg-gray-50 rounded-md cursor-pointer`}
+                  onClick={() => toggleDropdown("contact")}
+                >
+                  <span>Contact Us</span>
+                  {activeDropdowns["contact"] ? (
+                    <ChevronDown className="h-5 w-5 transition-transform duration-200" />
+                  ) : (
+                    <ChevronRight className="h-5 w-5 transition-transform duration-200" />
+                  )}
+                </div>
+                <ul
+                  className={`pl-4 mt-1 space-y-1 overflow-hidden transition-all duration-300 custom-scrollbar ${
+                    activeDropdowns["contact"] ? "max-h-60 overflow-y-auto" : "max-h-0"
+                  }`}
+                >
+                  <li>
+                    <Link
+                      href="/contact/arrange-visit"
+                      className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
+                      onClick={handleMobileLinkClick}
+                    >
+                      Arrange a Visit
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/contact/ask-question"
+                      className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
+                      onClick={handleMobileLinkClick}
+                    >
+                      Ask A Question
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/contact/register-your-child"
+                      className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
+                      onClick={handleMobileLinkClick}
+                    >
+                      Register Your Child
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/contact/find-us"
+                      className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
+                      onClick={handleMobileLinkClick}
+                    >
+                      Find Us
+                    </Link>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
+        </div>
 
-        <div className="absolute bottom-0 w-full p-4 bg-[#3aa756] text-white">
+        {/* Mobile Footer */}
+        <div className="p-4 bg-[#3aa756] text-white flex-shrink-0">
           <div className="flex justify-between items-center">
             <div className="flex space-x-4">
               <button onClick={() => showContactBanner("location")} className="hover:text-gray-200">

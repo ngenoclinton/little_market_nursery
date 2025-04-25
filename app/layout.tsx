@@ -3,6 +3,7 @@ import "@/app/globals.css"
 import type { Metadata } from "next"
 import { Quicksand } from "next/font/google"
 import Navbar from "@/components/navbar/NavigationBar"
+import Footer from "@/components/Footer"
 
 const quicksand = Quicksand({
   subsets: ["latin"],
@@ -25,6 +26,7 @@ export default function RootLayout({
       <body className="min-h-screen flex flex-col">
           <Navbar/>
           <div className="flex-grow pt-[160px]">{children}</div>
+          <Footer/>
       </body>
     </html>
   )

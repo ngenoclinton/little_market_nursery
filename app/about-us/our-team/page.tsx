@@ -23,9 +23,9 @@ export default function OurTeamPage() {
 
           <div className="grid md:grid-cols-3 gap-8 mb-8">
             <div className="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200">
-              <div className="sm:w-full relative h-64">
+              <div className="sm:w-full relative h-60">
                 <Image
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-ouLh1LnrsAUH7leTu78eR8Ryw9eo6E.png"
+                  src="/galleries/nursery-images/Our_People/tezcan-nursery-proprietor-manager.webp"
                   alt="Tezcan"
                   fill
                   className="object-cover object-top"
@@ -39,9 +39,9 @@ export default function OurTeamPage() {
             </div>
 
             <div className="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200">
-              <div className="sm:w-full relative h-64">
+              <div className="sm:w-full relative h-60">
                 <Image
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-ouLh1LnrsAUH7leTu78eR8Ryw9eo6E.png"
+                  src="/galleries/nursery-images/Our_People/emine-nursery-manager.webp"
                   alt="Emine"
                   fill
                   className="object-cover object-top"
@@ -55,9 +55,9 @@ export default function OurTeamPage() {
             </div>
 
             <div className="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200">
-              <div className="sm:w-full relative h-64">
+              <div className="sm:w-full relative h-60">
                 <Image
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-ouLh1LnrsAUH7leTu78eR8Ryw9eo6E.png"
+                  src="/galleries/nursery-images/Our_People/nicola-deputy-nursery-manager.webp"
                   alt="Nicola"
                   fill
                   className="object-cover object-top"
@@ -116,7 +116,7 @@ export default function OurTeamPage() {
             <div className="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200">
               <div className="sm:w-full relative h-64">
                 <Image
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-Jlvj6fQf92yayOWXgZWBEG37GioY7J.png"
+                 src="/galleries/school-club-images/Our_People/kathy-james-proprietor-manager.jpg"
                   alt="Kathy James"
                   fill
                   className="object-cover object-top"
@@ -132,7 +132,7 @@ export default function OurTeamPage() {
             <div className="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200">
               <div className="sm:w-full relative h-64">
                 <Image
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-Jlvj6fQf92yayOWXgZWBEG37GioY7J.png"
+                  src="/galleries/school-club-images/Our_People/michael-business-support-manager.jpeg"
                   alt="Michael Moodie"
                   fill
                   className="object-cover object-top"

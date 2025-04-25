@@ -14,42 +14,42 @@ export default function HolidayClubGalleryPage() {
   // Sample gallery images
   const galleryImages = [
     {
-      src: "/placeholder.svg?height=600&width=800&text=Holiday+Club+1",
+      src: "/galleries/school-club-images/holiday-club/holiday5.jpg",
       alt: "Children at Adventure Island",
       caption: "Fun day at Adventure Island",
     },
     {
-      src: "/placeholder.svg?height=600&width=800&text=Holiday+Club+2",
+      src: "/galleries/school-club-images/holiday-club/holiday4.jpg",
       alt: "Zoo trip",
       caption: "Our trip to Colchester Zoo",
     },
     {
-      src: "/placeholder.svg?height=600&width=800&text=Holiday+Club+3",
+      src: "/galleries/school-club-images/holiday-club/holiday3.jpg",
       alt: "Arts and crafts",
       caption: "Creative arts and crafts session",
     },
     {
-      src: "/placeholder.svg?height=600&width=800&text=Holiday+Club+4",
+      src: "/galleries/school-club-images/holiday-club/holiday2.jpg",
       alt: "Sports day",
       caption: "Sports activities in the park",
     },
     {
-      src: "/placeholder.svg?height=600&width=800&text=Holiday+Club+5",
+      src: "/galleries/school-club-images/club-activities/IMG_3545.jpg",
       alt: "Swimming",
       caption: "Swimming session at the local pool",
     },
     {
-      src: "/placeholder.svg?height=600&width=800&text=Holiday+Club+6",
+      src: "/galleries/school-club-images/club-activities/IMG_3546.jpg",
       alt: "Cooking class",
       caption: "Learning to make healthy snacks",
     },
     {
-      src: "/placeholder.svg?height=600&width=800&text=Holiday+Club+7",
+      src: "/galleries/school-club-images/club-activities/IMG_3547.jpg",
       alt: "Museum visit",
       caption: "Educational trip to the museum",
     },
     {
-      src: "/placeholder.svg?height=600&width=800&text=Holiday+Club+8",
+      src: "/galleries/school-club-images/club-activities/IMG_3564.jpg",
       alt: "Nature walk",
       caption: "Exploring nature in the local park",
     },

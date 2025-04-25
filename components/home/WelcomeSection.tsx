@@ -36,7 +36,7 @@ export default function WelcomeSection() {
           <div className="order-1 md:order-2 relative">
             <div className="relative h-[400px] md:h-[500px] rounded-lg overflow-hidden shadow-xl">
               <Image
-                src="https://img.freepik.com/free-photo/teacher-helping-kids-with-their-homework-classroom_23-2148892698.jpg?w=740"
+                src="/images/homeImg/camp.png"
                 alt="Teacher helping children with activities"
                 fill
                 className="object-cover"

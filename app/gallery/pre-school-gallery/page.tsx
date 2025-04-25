@@ -2,32 +2,62 @@ import GalleryGrid from "@/components/gallery-grid"
 
 const preSchoolGalleryImages = [
   {
-    src: "/images/pre-school/image1.jpg",
+    src: "/galleries/nursery-images/pre-school/IMG_3677.webp",
     alt: "Pre-school activity 1",
     caption: "Children engaged in a learning activity.",
   },
   {
-    src: "/images/pre-school/image2.jpg",
+    src: "/galleries/nursery-images/pre-school/IMG_3691.webp",
     alt: "Pre-school activity 2",
     caption: "Kids playing with building blocks.",
   },
   {
-    src: "/images/pre-school/image3.jpg",
+    src: "/galleries/nursery-images/pre-school/IMG_3692.webp",
+    alt: "Pre-school activity 2",
+    caption: "Kids playing with building blocks.",
+  },
+  {
+    src: "/galleries/nursery-images/pre-school/IMG_3693.webp",
+    alt: "Pre-school activity 2",
+    caption: "Kids playing with building blocks.",
+  },
+  {
+    src: "/galleries/nursery-images/pre-school/IMG_3694.webp",
+    alt: "Pre-school activity 2",
+    caption: "Kids playing with building blocks.",
+  },
+  {
+    src: "/galleries/nursery-images/pre-school/IMG_3889.webp",
+    alt: "Pre-school activity 2",
+    caption: "Kids playing with building blocks.",
+  },
+  {
+    src: "/galleries/nursery-images/pre-school/IMG_3890.webp",
+    alt: "Pre-school activity 2",
+    caption: "Kids playing with building blocks.",
+  },
+  {
+    src: "/galleries/nursery-images/pre-school/IMG_3898.webp",
+    alt: "Pre-school activity 2",
+    caption: "Kids playing with building blocks.",
+  },
+  {
+    src: "/galleries/nursery-images/pre-school/Jelly-Beans-Room-Creating-Sensory-Bottles.webp",
     alt: "Pre-school activity 3",
     caption: "A group of children during story time.",
   },
   {
-    src: "/images/pre-school/image4.jpg",
+    src: "/galleries/nursery-images/pre-school/Jelly-Beans-Room-Exploring-Sensory-Cubes.webp",
     alt: "Pre-school activity 4",
     caption: "Creative art session with paint.",
   },
   {
-    src: "/images/pre-school/image5.jpg",
+    src: "/galleries/nursery-images/pre-school/Jelly-Beans-Room-Learning-Cutting-Skills.webp",
     alt: "Pre-school activity 5",
     caption: "Outdoor play on the playground.",
   },
   {
-    src: "/images/pre-school/image6.jpg",
+    src: "/galleries/nursery-images/pre-school/Jelly-Beans-Room-Play-Dough-Fun.webp",
     alt: "Pre-school activity 6",
     caption: "Learning about shapes and colors.",
   },
