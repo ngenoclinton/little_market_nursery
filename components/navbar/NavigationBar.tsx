@@ -191,12 +191,12 @@ const Navbar = () => {
                   >
                     Our Team
                   </Link>
-                  <Link
+                  {/* <Link
                     href="/about-us/facilities"
                     className="block py-3 px-4 text-[#3aa756] hover:bg-gray-100 hover:text-[#2d8444] border-b border-gray-200"
                   >
                     Facilities
-                  </Link>
+                  </Link> */}
                   <Link
                     href="/about-us/board-of-governors"
                     className="block py-3 px-4 text-[#3aa756] hover:bg-gray-100 hover:text-[#2d8444] border-b border-gray-200"
@@ -533,7 +533,7 @@ const Navbar = () => {
                       Our Team
                     </Link>
                   </li>
-                  <li>
+                  {/* <li>
                     <Link
                       href="/about-us/facilities"
                       className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
@@ -541,7 +541,7 @@ const Navbar = () => {
                     >
                       Facilities
                     </Link>
-                  </li>
+                  </li> */}
                   <li>
                     <Link
                       href="/about-us/board-of-governors"
