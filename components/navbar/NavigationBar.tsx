@@ -88,7 +88,7 @@ const Navbar = () => {
                   <Image src="/Nursery-logo.png" alt="Kid's Promising Tomorrow Logo" fill className="object-contain" />
                 </div>
                 <div className="ml-3">
-                  <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-[#3aa756]">
+                  <h1 className="text-lg md:text-2xl lg:text-3xl font-bold text-[#3aa756]">
                     Little Market <span className="text-[#df2020]">Nursery</span>
                   </h1>
                 </div>
