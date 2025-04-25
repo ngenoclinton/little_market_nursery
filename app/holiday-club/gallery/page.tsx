@@ -81,7 +81,7 @@ export default function HolidayClubGalleryPage() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-12 pt-[160px]" onKeyDown={handleKeyDown} tabIndex={0}>
+    <div className="container mx-auto px-4 pb-12 md:pt-[100px] bg-[#ffffff]" onKeyDown={handleKeyDown} tabIndex={0}>
       <div className="flex items-center mb-8">
         <Link href="/holiday-club" className="text-[#3aa756] hover:text-[#2d8444] mr-4">
           ← Back to Holiday Club

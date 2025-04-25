@@ -12,7 +12,7 @@ const contactNavItems = [
 export default function ContactLayout({ children }: { children: ReactNode }) {
   return (
     <div className="min-h-screen bg-white">
-      <Breadcrumb/>
+      {/* <Breadcrumb/> */}
 
       <div className="container mx-auto px-4 py-8">
         <div className="grid md:grid-cols-4 gap-8">

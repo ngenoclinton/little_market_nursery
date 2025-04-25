@@ -34,7 +34,7 @@ export default function EventsSection() {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-[#3aa756]">Upcoming Events</h2>
-          <Link href="/events" className="text-[#3aa756] hover:text-[#2d8444] font-medium">
+          <Link href="/" className="text-[#3aa756] hover:text-[#2d8444] font-medium">
             View All Events →
           </Link>
         </div>
@@ -64,7 +64,8 @@ export default function EventsSection() {
                   </div>
                 </div>
                 <Link
-                  href={`/events/${event.id}`}
+                  // href={`/events/${event.id}`}
+                  href="/"
                   className="mt-4 inline-block text-[#3aa756] hover:text-[#2d8444] font-medium"
                 >
                   Event Details →

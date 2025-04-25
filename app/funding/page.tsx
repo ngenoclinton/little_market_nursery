@@ -2,7 +2,7 @@ import Link from "next/link"
 
 export default function FundingPage() {
   return (
-    <div className="container mx-auto px-4 py-12 pt-[160px]">
+    <div className="container mx-auto px-4 pb-12 lg:pt-[100px] bg-[#ffffff]">
       <h1 className="text-3xl font-bold text-[#3aa756] mb-6">Funding</h1>
 
       <div className="bg-white p-8 rounded-lg shadow-md mb-8">

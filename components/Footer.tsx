@@ -174,13 +174,18 @@ export default function Footer() {
             <p className="text-gray-500 text-sm">
               &copy; {new Date().getFullYear()} Little Market Nursery. All rights reserved.
             </p>
+            <p className="text-gray-500 text-sm">
+               Powered by <Link href="https://www.irobtechnologies.com/" className="text-sm text-[#3aa756] transition-colors">
+              iRob Technologies.
+              </Link>
+            </p>
             <div className="flex space-x-4 mt-4 md:mt-0">
-              <Link href="/privacy-policy" className="text-gray-500 text-sm hover:text-[#3aa756] transition-colors">
+              <p className="text-gray-500 text-sm hover:text-[#3aa756] transition-colors">
                 Privacy Policy
-              </Link>
-              <Link href="/terms-of-service" className="text-gray-500 text-sm hover:text-[#3aa756] transition-colors">
+              </p>
+              <p className="text-gray-500 text-sm hover:text-[#3aa756] transition-colors">
                 Terms of Service
-              </Link>
+              </p>
               <Link href="/cookie-policy" className="text-gray-500 text-sm hover:text-[#3aa756] transition-colors">
                 Cookie Policy
               </Link>

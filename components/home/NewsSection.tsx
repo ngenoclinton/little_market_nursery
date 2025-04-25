@@ -35,7 +35,10 @@ export default function NewsSection() {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-[#3aa756]">Latest News</h2>
-          <Link href="/news" className="text-[#3aa756] hover:text-[#2d8444] font-medium">
+          <Link
+          //  href="/news"
+          href="/"
+            className="text-[#3aa756] hover:text-[#2d8444] font-medium">
             View All News →
           </Link>
         </div>
@@ -59,7 +62,10 @@ export default function NewsSection() {
                 </div>
                 <h3 className="text-xl font-bold mb-2 text-gray-800">{item.title}</h3>
                 <p className="text-gray-600 mb-4">{item.excerpt}</p>
-                <Link href={`/news/${item.id}`} className="text-[#3aa756] hover:text-[#2d8444] font-medium">
+                <Link 
+                // href={`/news/${item.id}`} 
+                href="/"
+                className="text-[#3aa756] hover:text-[#2d8444] font-medium">
                   Read More →
                 </Link>
               </div>
