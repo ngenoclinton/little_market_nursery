@@ -76,7 +76,7 @@ const HomeHero = () => {
           </h1>
           <p className="text-xl md:text-2xl mb-8">Nurturing young minds with care and creativity since 2011.</p>
           <Link
-            href="/curriculum"
+            href="curriculum/our-approach"
             className="inline-block px-8 py-4 bg-[#fcb900] hover:bg-[#e6a800] text-white font-medium rounded-full transition-colors duration-300"
           >
             Explore Our Curriculum

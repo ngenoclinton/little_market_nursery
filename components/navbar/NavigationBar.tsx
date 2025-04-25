@@ -78,13 +78,13 @@ const Navbar = () => {
       )}
 
       {/* Top Navigation - Logo, School Name & Contact Icons */}
-      <div className="bg-white py-4">
+      <div className="bg-white">
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap items-center justify-between">
             {/* Logo and School Name */}
             <div className="flex items-center">
               <Link href="/" className="flex items-center">
-                <div className="relative h-24 w-24 md:h-28 md:w-28 lg:h-32 lg:w-32">
+                <div className="relative h-24 w-24 md:h-28 md:w-28 lg:h-36 lg:w-36 -mt-6">
                   <Image src="/Nursery-logo.png" alt="Kid's Promising Tomorrow Logo" fill className="object-contain" />
                 </div>
                 <div className="ml-3">
@@ -118,18 +118,7 @@ const Navbar = () => {
               >
                 <Mail size={20} />
               </button>
-              <button
-                className="flex items-center justify-center w-10 h-10 bg-[#3aa756] text-white rounded-none hover:bg-[#2d8444] transition-colors"
-                aria-label="Search"
-              >
-                <Search size={20} />
-              </button>
-              <button
-                className="flex items-center justify-center w-10 h-10 bg-[#3aa756] text-white rounded-none hover:bg-[#2d8444] transition-colors"
-                aria-label="Language"
-              >
-                <Globe size={20} />
-              </button>
+             
             </div>
 
             {/* Mobile Menu Button */}

@@ -20,13 +20,13 @@ export default function WelcomeSection() {
             </p>
             <div className="flex flex-wrap gap-4">
               <Link
-                href="/about"
+                href="about-us/our-story"
                 className="px-6 py-3 bg-[#3aa756] hover:bg-[#2d8444] text-white rounded-full transition-colors duration-300"
               >
                 About Us
               </Link>
               <Link
-                href="/virtual-tour"
+                href="gallery/baby-gallery"
                 className="px-6 py-3 border-2 border-[#3aa756] text-[#3aa756] hover:bg-[#3aa756] hover:text-white rounded-full transition-colors duration-300"
               >
                 Virtual Tour
