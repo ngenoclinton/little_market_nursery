@@ -1,5 +1,5 @@
 "use client"
-
+ 
 import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import Image from "next/image"
@@ -443,11 +443,10 @@ const Navbar = () => {
           mobileMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
         style={{ top: "0", height: "100vh" }}
-        ref={mobileNavRef}
       >
         {/* Mobile Header */}
         <div className="flex justify-between items-center p-4 border-b flex-shrink-0">
-          <Link href="/" className="flex items-center" onClick={handleMobileLinkClick}>
+          <Link href="/" className="flex items-center">
             <div className="relative w-12 h-12 mr-2">
               <Image src="/Nursery-logo.png" alt="School Logo" fill className="object-contain" />
             </div>
@@ -522,7 +521,7 @@ const Navbar = () => {
                       Our Team
                     </Link>
                   </li>
-                  {/* <li>
+                  <li>
                     <Link
                       href="/about-us/facilities"
                       className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
@@ -530,7 +529,7 @@ const Navbar = () => {
                     >
                       Facilities
                     </Link>
-                  </li> */}
+                  </li>
                   <li>
                     <Link
                       href="/about-us/board-of-governors"
