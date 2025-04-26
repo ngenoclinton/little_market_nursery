@@ -1,88 +1,88 @@
-import Link from "next/link"
 import Image from "next/image"
+import Link from "next/link"
 
-export default function AfterSchoolClubPage() {
+const AfterSchoolClubPage = () => {
   return (
-    <div>
-      <h1 className="text-3xl font-bold text-[#3aa756] mb-6">After School Club (5–11 Years)</h1>
+    <div className="container mx-auto py-12">
+      <h1 className="text-3xl font-semibold text-center text-gray-800 mb-8">After School Club</h1>
 
-      <div className="prose max-w-none">
-        <div className="bg-[#df2020]/12 bg-opacity-10 p-6 rounded-lg mb-8 border-l-4 border-[#df2020]">
-          <h2 className="text-2xl font-bold text-[#df2020] mb-2">School Club</h2>
-          <div className="flex flex-wrap gap-4 mb-4">
-            <div className="bg-[#3aa756] text-white px-4 py-2 rounded-md">
-              <span className="font-bold">Age Group:</span> Five Years to Eleven Years
-            </div>
-            <div className="bg-[#3aa756] text-white px-4 py-2 rounded-md">
-              <span className="font-bold">Staff Ratio:</span> 1 - 10
-            </div>
-          </div>
-        </div>
-
-        <p className="mb-4">
-          Our After School Club provides a safe, fun, and enriching environment for school-age children. We offer a
-          range of activities designed to complement their school day and provide opportunities for relaxation, play,
-          and continued learning.
+      <div className="prose prose-lg mx-auto text-gray-700">
+        <p>
+          Welcome to our After School Club! We provide a safe, fun, and engaging environment for children after school
+          hours. Our club offers a variety of activities to cater to different interests and age groups.
         </p>
 
-        <p className="mb-4">
-          Children can enjoy supervised homework support, arts and crafts, sports, games, and special interest clubs.
-          Our experienced staff ensure that each child&apos;s individual needs and interests are catered to, while
-          promoting social skills, independence, and confidence.
+        <h2>Our Mission</h2>
+        <p>
+          Our mission is to provide a nurturing and stimulating environment where children can learn, grow, and develop
+          their social skills. We aim to support working parents by offering a reliable and affordable after-school care
+          solution.
         </p>
 
-        <p className="mb-4">
-          We provide healthy snacks and refreshments, and work closely with parents and schools to ensure continuity of
-          care. Transportation from local schools to our facility is available.
+        <h2>Activities</h2>
+        <p>We offer a wide range of activities, including:</p>
+        <ul>
+          <li>Arts and Crafts</li>
+          <li>Sports and Games</li>
+          <li>Homework Help</li>
+          <li>Reading and Story Time</li>
+          <li>Outdoor Play</li>
+        </ul>
+
+        <h2>Schedule</h2>
+        <p>
+          Our After School Club operates from Monday to Friday, from school dismissal until 6:00 PM. We also offer
+          holiday programs during school breaks.
         </p>
 
-        <div className="grid md:grid-cols-2 gap-6 my-8">
-          <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
-            <h3 className="text-xl font-bold text-[#3aa756] mb-2">Activities Include</h3>
-            <ul className="list-disc pl-5 space-y-1">
-              <li>Homework support</li>
-              <li>Arts and crafts</li>
-              <li>Sports and outdoor games</li>
-              <li>Reading corner</li>
-              <li>Board games and puzzles</li>
-              <li>Cooking club</li>
-              <li>Science experiments</li>
-              <li>Drama and music</li>
-            </ul>
-          </div>
+        <h2>Registration</h2>
+        <p>
+          To register your child for our After School Club, please download the registration form from our website and
+          submit it to our office. Spaces are limited, so early registration is encouraged.
+        </p>
 
-          <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
-            <h3 className="text-xl font-bold text-[#3aa756] mb-2">Hours of Operation</h3>
-            <p className="mb-2">
-              <strong>After School:</strong> 3:00 PM - 6:00 PM (Monday to Friday during term time)
-            </p>
-            <p className="mb-2">
-              <strong>Holiday Club:</strong> 8:00 AM - 6:00 PM (Monday to Friday during school holidays)
-            </p>
-            <p>
-              <strong>Contact:</strong> 07495 190473 | admin@littlemarketschoolclub.co.uk
-            </p>
-          </div>
-        </div>
+        <h2>Contact Us</h2>
+        <p>
+          If you have any questions or would like to learn more about our After School Club, please contact us at (555)
+          123-4567 or email us at info@afterschoolclub.com.
+        </p>
+      </div>
 
-        <div className="relative h-64 md:h-80 mb-8 rounded-lg overflow-hidden">
+      {/* Image Gallery */}
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
+        <div className="relative h-64 md:h-80 rounded-lg overflow-hidden shadow-md">
           <Image
-            src="/placeholder.svg?height=400&width=800"
+            src="/galleries/Activities/activity-1.png"
             alt="After School Club activities"
             fill
             className="object-cover"
+            sizes="(max-width: 768px) 100vw, 50vw"
           />
         </div>
 
-        <div className="flex justify-center">
+        <div className="relative h-64 md:h-80 rounded-lg overflow-hidden shadow-md">
+          <Image
+            src="/galleries/Activities/activity-01.png"
+            alt="After School Club activities"
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
+        </div>
+      </div>
+
+      
+<div className="flex justify-center">
           <Link
-            href="/gallery/after-school-club"
+            href="/holiday-club/gallery"
             className="inline-flex items-center px-6 py-3 bg-[#3aa756] text-white rounded-md hover:bg-[#2d8444] transition-colors"
           >
             View Gallery
           </Link>
         </div>
-      </div>
     </div>
   )
 }
+
+export default AfterSchoolClubPage

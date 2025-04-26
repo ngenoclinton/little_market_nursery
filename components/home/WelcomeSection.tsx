@@ -8,7 +8,7 @@ export default function WelcomeSection() {
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="order-2 md:order-1">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#3aa756]">
-              Welcome to Little Market Nursery & Shcool Club
+              Welcome to Little Market Nursery
             </h2>
             <p className="text-gray-700 mb-6 text-lg">
               At Little Market Nursery, we believe every child deserves the best start in life. Our nurturing

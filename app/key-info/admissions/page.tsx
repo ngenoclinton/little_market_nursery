@@ -93,9 +93,9 @@ export default function AdmissionsPage() {
             <p className="mb-4">
               If you have any questions about the admissions process or would like to arrange a visit, please contact us:
             </p>
-            <p>
-              <strong>Phone:</strong> 01708 608434 | <strong>Email:</strong> admin@littlemarketnursery.co.uk
-            </p>
+            <div className="text-[#3aa756]">
+            <strong className="text-red-600">Contact:</strong> admin@littlemarketschoolclub.co.uk | <strong className="text-red-600">Phone:</strong> 01708 608434 | <strong className="text-red-600">Mobile:</strong> 07495 190473
+          </div>
           </div>
         </div>
       </div>

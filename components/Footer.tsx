@@ -1,6 +1,14 @@
-import Link from "next/link"
-import Image from "next/image"
-import { Facebook, Instagram, Twitter, Mail, Phone, MapPin, ArrowRight } from "lucide-react"
+import Link from "next/link";
+import Image from "next/image";
+import {
+  Facebook,
+  Instagram,
+  Twitter,
+  Mail,
+  Phone,
+  MapPin,
+  ArrowRight,
+} from "lucide-react";
 
 export default function Footer() {
   return (
@@ -11,7 +19,12 @@ export default function Footer() {
           <div className="space-y-4">
             <div className="flex items-center">
               <div className="relative h-16 w-16">
-                <Image src="/Nursery-logo.png" alt="Little Market Nursery Logo" fill className="object-contain" />
+                <Image
+                  src="/Nursery-logo.png"
+                  alt="Little Market Nursery Logo"
+                  fill
+                  className="object-contain"
+                />
               </div>
               <div className="ml-3">
                 <h3 className="text-lg font-bold text-[#3aa756]">
@@ -21,8 +34,9 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-gray-600 text-sm">
-              Providing a nurturing environment where children can learn, grow, and thrive through play-based learning
-              and individualized attention.
+              Providing a nurturing environment where children can learn, grow,
+              and thrive through play-based learning and individualized
+              attention.
             </p>
             <div className="flex space-x-3">
               <a
@@ -121,24 +135,38 @@ export default function Footer() {
             </h3>
             <ul className="space-y-3">
               <li className="flex items-start">
-                <div className="flex items-center justify-center w-8 h-8 rounded-full bg-[#3aa756] bg-opacity-10 mr-3 flex-shrink-0">
+                <div className="flex items-center justify-center w-5 h-5 rounded-full bg-[#3aa756] bg-opacity-10 mr-3 flex-shrink-0">
                   <MapPin size={16} className="text-[#3aa756]" />
                 </div>
                 <span className="text-gray-600">
-                Little Market Nursery, 123 Education Avenue, Learning City, LC1 2ED
+                  Little Market Day Nursery The Wykeham Centre Market Place,
+                  Romford RM1 3AB GB{" "}
+                </span>
+              </li>
+
+              <li className="flex items-center">
+                <div className="flex items-center justify-center w-5 h-5 rounded-full bg-[#3aa756] bg-opacity-10 mr-3 flex-shrink-0">
+                  <Phone size={16} className="text-[#3aa756]" />
+                </div>
+                <span className="text-gray-600">
+                  <strong>Tel:</strong> 01708 608 434
                 </span>
               </li>
               <li className="flex items-center">
-                <div className="flex items-center justify-center w-8 h-8 rounded-full bg-[#3aa756] bg-opacity-10 mr-3 flex-shrink-0">
+                <div className="flex items-center justify-center w-5 h-5 rounded-full bg-[#3aa756] bg-opacity-10 mr-3 flex-shrink-0">
                   <Phone size={16} className="text-[#3aa756]" />
                 </div>
-                <span className="text-gray-600">+44 1234 567890</span>
+                <span className="text-gray-600">
+                  <strong>Mobile:</strong> 07983 612 443
+                </span>
               </li>
               <li className="flex items-center">
-                <div className="flex items-center justify-center w-8 h-8 rounded-full bg-[#3aa756] bg-opacity-10 mr-3 flex-shrink-0">
+                <div className="flex items-center justify-center w-5 h-5 rounded-full bg-[#3aa756] bg-opacity-10 mr-3 flex-shrink-0">
                   <Mail size={16} className="text-[#3aa756]" />
                 </div>
-                <span className="text-gray-600">info@littlemarketnursery.edu</span>
+                <span className="text-gray-600">
+                  admin@littlemarketnursery.co.uk
+                </span>
               </li>
             </ul>
           </div>
@@ -152,8 +180,12 @@ export default function Footer() {
             <div className="bg-white rounded-lg shadow-sm p-4 border border-gray-100">
               <ul className="space-y-3">
                 <li className="flex justify-between items-center pb-2 border-b border-gray-100">
-                  <span className="text-gray-600 font-medium">Monday - Friday:</span>
-                  <span className="text-[#3aa756] font-bold">7:00am - 7:00pm</span>
+                  <span className="text-gray-600 font-medium">
+                    Monday - Friday:
+                  </span>
+                  <span className="text-[#3aa756] font-bold">
+                    7:00am - 7:00pm
+                  </span>
                 </li>
                 <li className="flex justify-between items-center pb-2 border-b border-gray-100">
                   <span className="text-gray-600 font-medium">Saturday:</span>
@@ -172,11 +204,16 @@ export default function Footer() {
         <div className="mt-8 pt-6 border-t border-gray-200">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-500 text-sm">
-              &copy; {new Date().getFullYear()} Little Market Nursery. All rights reserved.
+              &copy; {new Date().getFullYear()} Little Market Nursery. All
+              rights reserved.
             </p>
             <p className="text-gray-500 text-sm">
-               Powered by <Link href="https://www.irobtechnologies.com/" className="text-sm text-[#3aa756] transition-colors">
-              iRob Technologies.
+              Powered by{" "}
+              <Link
+                href="https://www.irobtechnologies.com/"
+                className="text-sm text-[#3aa756] transition-colors"
+              >
+                iRob Technologies.
               </Link>
             </p>
             <div className="flex space-x-4 mt-4 md:mt-0">
@@ -186,7 +223,10 @@ export default function Footer() {
               <p className="text-gray-500 text-sm hover:text-[#3aa756] transition-colors">
                 Terms of Service
               </p>
-              <Link href="/cookie-policy" className="text-gray-500 text-sm hover:text-[#3aa756] transition-colors">
+              <Link
+                href="/cookie-policy"
+                className="text-gray-500 text-sm hover:text-[#3aa756] transition-colors"
+              >
                 Cookie Policy
               </Link>
             </div>
@@ -194,5 +234,5 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-  )
+  );
 }

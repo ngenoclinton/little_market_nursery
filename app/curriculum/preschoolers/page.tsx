@@ -36,18 +36,31 @@ export default function PreschoolersPage() {
           communication book so you know what your child has experienced in the day.
         </p>
 
-        <div className="relative h-64 md:h-80 mb-8 rounded-lg overflow-hidden">
-          <Image
-            src="/placeholder.svg?height=400&width=800"
-            alt="Preschoolers learning environment"
-            fill
-            className="object-cover"
-          />
-        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
+                <div className="relative h-64 md:h-80 rounded-lg overflow-hidden shadow-md">
+                  <Image
+                    src="/galleries/nursery-images/pre-school/IMG_3677.webp"
+                    alt="After School Club activities"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                </div>
+        
+                <div className="relative h-64 md:h-80 rounded-lg overflow-hidden shadow-md">
+                  <Image
+                    src="/galleries/nursery-images/pre-school/IMG_3693.webp"
+                    alt="After School Club activities"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                </div>
+              </div>
 
         <div className="flex justify-center">
           <Link
-            href="/gallery/preschoolers"
+            href="/gallery/pre-school-gallery"
             className="inline-flex items-center px-6 py-3 bg-[#3aa756] text-white rounded-md hover:bg-[#2d8444] transition-colors"
           >
             View Gallery

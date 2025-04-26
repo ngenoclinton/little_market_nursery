@@ -21,14 +21,15 @@ export default function OurTeamPage() {
             <h2 className="text-2xl font-bold text-[#3aa756]">Little Market Day Nursery Team</h2>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 mb-8">
-            <div className="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200">
-              <div className="sm:w-full relative h-60">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+            <div className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 transition-transform hover:shadow-lg hover:-translate-y-1">
+              <div className="relative h-64 w-full overflow-hidden rounded-t-lg">
                 <Image
                   src="/galleries/nursery-images/Our_People/tezcan-nursery-proprietor-manager.webp"
                   alt="Tezcan"
                   fill
-                  className="object-cover object-top"
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
                 />
               </div>
               <div className="p-6">
@@ -38,13 +39,14 @@ export default function OurTeamPage() {
               </div>
             </div>
 
-            <div className="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200">
-              <div className="sm:w-full relative h-60">
+            <div className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 transition-transform hover:shadow-lg hover:-translate-y-1">
+              <div className="relative h-64 w-full overflow-hidden rounded-t-lg">
                 <Image
                   src="/galleries/nursery-images/Our_People/emine-nursery-manager.webp"
                   alt="Emine"
                   fill
-                  className="object-cover object-top"
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
                 />
               </div>
               <div className="p-6">
@@ -54,13 +56,14 @@ export default function OurTeamPage() {
               </div>
             </div>
 
-            <div className="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200">
-              <div className="sm:w-full relative h-60">
+            <div className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 transition-transform hover:shadow-lg hover:-translate-y-1">
+              <div className="relative h-64 w-full overflow-hidden rounded-t-lg">
                 <Image
                   src="/galleries/nursery-images/Our_People/nicola-deputy-nursery-manager.webp"
                   alt="Nicola"
                   fill
-                  className="object-cover object-top"
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
                 />
               </div>
               <div className="p-6">
@@ -112,14 +115,15 @@ export default function OurTeamPage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8 mb-8">
-            <div className="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200">
-              <div className="sm:w-full relative h-64">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+            <div className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 transition-transform hover:shadow-lg hover:-translate-y-1">
+              <div className="relative h-64 w-full overflow-hidden rounded-t-lg">
                 <Image
-                 src="/galleries/school-club-images/Our_People/kathy-james-proprietor-manager.jpg"
+                  src="/galleries/school-club-images/Our_People/kathy-james-proprietor-manager.jpg"
                   alt="Kathy James"
                   fill
-                  className="object-cover object-top"
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
                 />
               </div>
               <div className="p-6">
@@ -129,13 +133,14 @@ export default function OurTeamPage() {
               </div>
             </div>
 
-            {/* <div className="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200">
-              <div className="sm:w-full relative h-64">
+            {/* <div className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 transition-transform hover:shadow-lg hover:-translate-y-1">
+              <div className="relative h-64 w-full overflow-hidden rounded-t-lg">
                 <Image
                   src="/galleries/school-club-images/Our_People/michael-business-support-manager.jpeg"
                   alt="Michael Moodie"
                   fill
-                  className="object-cover object-top"
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
                 />
               </div>
               <div className="p-6">

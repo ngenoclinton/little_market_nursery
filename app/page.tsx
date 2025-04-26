@@ -20,7 +20,7 @@ export default function Home() {
 
       <WelcomeSection />
       <FeaturesSection />
-      <NewsSection />
+      {/* <NewsSection /> */}
       <EventsSection />
       <TestimonialsSection />
     </div>

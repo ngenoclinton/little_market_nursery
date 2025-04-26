@@ -37,18 +37,31 @@ export default function BabiesPage() {
           your key-person so you know what your child has done during the day.
         </p>
 
-        <div className="relative h-64 md:h-80 mb-8 rounded-lg overflow-hidden">
-          <Image
-            src="/placeholder.svg?height=400&width=800"
-            alt="Babies learning environment"
-            fill
-            className="object-cover"
-          />
-        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
+                  <div className="relative h-64 md:h-80 rounded-lg overflow-hidden shadow-md">
+                    <Image
+                      src="/galleries/nursery-images/babies/IMG_3675.webp"
+                      alt="After School Club activities"
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                  </div>
+        
+                  <div className="relative h-64 md:h-80 rounded-lg overflow-hidden shadow-md">
+                    <Image
+                      src="/galleries/nursery-images/babies/IMG_3676-1.webp"
+                      alt="After School Club activities"
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                  </div>
+                </div>
 
         <div className="flex justify-center">
           <Link
-            href="/gallery/babies"
+            href="/gallery/baby-gallery"
             className="inline-flex items-center px-6 py-3 bg-[#3aa756] text-white rounded-md hover:bg-[#2d8444] transition-colors"
           >
             View Gallery

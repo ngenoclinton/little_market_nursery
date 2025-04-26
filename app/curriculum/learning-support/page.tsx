@@ -120,7 +120,7 @@ export default function LearningSupportPage() {
               child's additional needs, please contact our SENCO:
             </p>
             <p>
-              <strong>Email:</strong> senco@littlemarketnursery.co.uk | <strong>Phone:</strong> 01708 608434
+              <strong className="text-[#df2020]">Email:</strong> admin@littlemarketnursery.co.uk | <strong className="text-[#df2020]">Phone:</strong> 01708 608 434 | <strong className="text-[#df2020]">Mobile:</strong> 07983 612 443
             </p>
           </div>
         </div>

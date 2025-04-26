@@ -34,7 +34,7 @@ export default function OurApproachPage() {
 
         <div className="flex justify-center">
           <Link
-            href="/gallery"
+            href="/gallery/baby-gallery"
             className="inline-flex items-center px-6 py-3 bg-[#3aa756] text-white rounded-md hover:bg-[#2d8444] transition-colors"
           >
             View Gallery

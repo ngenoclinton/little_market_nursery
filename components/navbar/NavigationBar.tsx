@@ -41,13 +41,13 @@ const Navbar = () => {
   const showContactBanner = (type: string) => {
     switch (type) {
       case "location":
-        setContactBanner("Kid's Promising Tomorrow, 123 Education Avenue, Learning City, LC1 2ED")
+        setContactBanner("The Wykeham Centre, Market Place, Romford, RM1 3AB")
         break
       case "phone":
-        setContactBanner("+44 1234 567890")
+        setContactBanner("Nursery: Tel: 01708 608434 | Mobile: 07983 612443 || School Club: Tel: 01708 729186 | Mobile: 07495 190473")
         break
       case "email":
-        setContactBanner("info@kidspromisingtomorrow.edu")
+        setContactBanner("Nursery: admin@littlemarketnursery.co.uk || School Club: admin@littlemarketschoolclub.co.uk")
         break
       default:
         setContactBanner(null)
@@ -67,7 +67,7 @@ const Navbar = () => {
       {/* Contact Banner */}
       {contactBanner && (
         <div className="bg-[#3aa756] text-white px-4 flex justify-between items-center">
-          <div className="flex items-center">
+          <div className="flex items-center justify-end">
             <MapPin size={16} className="mr-2" />
             <span>{contactBanner}</span>
           </div>

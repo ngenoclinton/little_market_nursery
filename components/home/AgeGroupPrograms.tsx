@@ -28,7 +28,7 @@ const ageGroups = [
     ageRange: "3–5 years",
     description: "Prepares for primary school through structured play, roleplay, crafts, reading, and outdoor play.",
     color: "#3aa756",
-    icon: "/images/homeImages/pre-school/pre-sch-1/JBeans-water-Play.webp",
+    icon: "/images/homeImages/pre-school/pre-sch-2/JBeans-Exploring-Cubes.webp",
   },
 ]
 

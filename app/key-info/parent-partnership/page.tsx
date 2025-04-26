@@ -175,9 +175,9 @@ export default function ParentPartnershipPage() {
               If you would like to get more involved or have ideas for enhancing our parent partnership approach, please
               speak to your child's key person or the nursery manager.
             </p>
-            <p>
-              <strong>Phone:</strong> 01708 608434 | <strong>Email:</strong> admin@littlemarketnursery.co.uk
-            </p>
+            <div className="text-[#3aa756]">
+            <strong className="text-red-600">Contact:</strong> admin@littlemarketschoolclub.co.uk | <strong className="text-red-600">Phone:</strong> 01708 608434 | <strong className="text-red-600">Mobile:</strong> 07495 190473
+          </div>
           </div>
         </div>
       </div>

@@ -55,9 +55,8 @@ export default function OurProspectusPage() {
             If you prefer a physical copy of our prospectus, please contact our office. We would be happy to mail one to
             you or have one ready for pickup during your visit to our nursery.
           </p>
-          <div className="flex items-center text-[#3aa756]">
-            <span className="font-medium">Contact us:</span>
-            <span className="ml-2">01708 608434 | admin@littlemarketnursery.co.uk</span>
+          <div className="text-[#3aa756]">
+            <strong className="text-red-600">Contact:</strong> admin@littlemarketschoolclub.co.uk | <strong className="text-red-600">Phone:</strong> 01708 608434 | <strong className="text-red-600">Mobile:</strong> 07495 190473
           </div>
         </div>
       </div>

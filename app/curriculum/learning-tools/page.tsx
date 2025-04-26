@@ -11,7 +11,7 @@ export default function LearningToolsPage() {
             <div className="md:w-1/4">
               <div className="relative h-40 w-40">
                 <Image
-                  src="/placeholder.svg?height=200&width=200"
+                  src="/galleries/tapestry/tapestry-2.png"
                   alt="Tapestry Online Learning Journal"
                   fill
                   className="object-contain"
@@ -94,8 +94,7 @@ export default function LearningToolsPage() {
             contact our office.
           </p>
           <p>
-            <strong>Email:</strong> admin@littlemarketnursery.co.uk | <strong>Phone:</strong> 01708 608434
-          </p>
+          <strong className="text-[#df2020]">Email:</strong> admin@littlemarketnursery.co.uk | <strong className="text-[#df2020]">Phone:</strong> 01708 608 434 | <strong className="text-[#df2020]">Mobile:</strong> 07983 612 443          </p>
         </div>
       </div>
     </div>

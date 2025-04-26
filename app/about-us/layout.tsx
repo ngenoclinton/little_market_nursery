@@ -6,7 +6,7 @@ const aboutUsNavItems = [
   { title: "Our Story", href: "our-story" },
   { title: "Vision & Mission", href: "vision-mission" },
   { title: "Our Team", href: "our-team" },
-  { title: "Facilities", href: "facilities" },
+  // { title: "Facilities", href: "facilities" },
   { title: "Board of Governors", href: "board-of-governors" },
   { title: "Our Prospectus", href: "our-prospectus" },
 ]

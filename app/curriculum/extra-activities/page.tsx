@@ -12,7 +12,7 @@ export default function ExtraActivitiesPage() {
           opportunities for children to explore different areas of learning in depth.
         </p>
 
-        <div className="grid md:grid-cols-2 gap-8 mb-12">
+        {/* <div className="grid md:grid-cols-2 gap-8 mb-12">
           <div className="bg-white rounded-lg shadow-md overflow-hidden">
             <div className="relative h-64">
               <Image
@@ -113,7 +113,7 @@ export default function ExtraActivitiesPage() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
         <h2 className="text-2xl font-bold text-[#3aa756] mb-4">Special Workshops and Events</h2>
 
@@ -162,7 +162,7 @@ export default function ExtraActivitiesPage() {
             activity, please speak to your child's key person or the nursery manager.
           </p>
           <p>
-            <strong>Contact:</strong> activities@littlemarketnursery.co.uk | <strong>Phone:</strong> 01708 608434
+            <strong className="text-red-600">Contact:</strong> admin@littlemarketschoolclub.co.uk | <strong className="text-red-600">Phone:</strong> 01708 608434 | <strong className="text-red-600">Mobile:</strong> 07495 190473
           </p>
         </div>
       </div>
