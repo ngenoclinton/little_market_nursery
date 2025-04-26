@@ -129,7 +129,7 @@ export default function OurTeamPage() {
               </div>
             </div>
 
-            <div className="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200">
+            {/* <div className="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200">
               <div className="sm:w-full relative h-64">
                 <Image
                   src="/galleries/school-club-images/Our_People/michael-business-support-manager.jpeg"
@@ -143,7 +143,7 @@ export default function OurTeamPage() {
                 <p className="text-[#ff6900] font-medium mb-3">Business Support Manager</p>
                 <p className="text-sm text-gray-600 mb-2">NVQ Level 2, NVQ Level 3</p>
               </div>
-            </div>
+            </div> */}
           </div>
 
           <div className="bg-white p-6 rounded-lg shadow-md mb-8">
