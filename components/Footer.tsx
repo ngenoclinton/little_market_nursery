@@ -211,12 +211,12 @@ export default function Footer() {
               Powered by{" "}
               <Link
                 href="https://www.irobtechnologies.com/"
-                className="text-sm text-[#3aa756] transition-colors"
+                className="text-sm text-[#3aa756] transition-colors underline"
               >
                 iRob Technologies.
               </Link>
             </p>
-            <div className="flex space-x-4 mt-4 md:mt-0">
+            {/* <div className="flex space-x-4 mt-4 md:mt-0">
               <p className="text-gray-500 text-sm hover:text-[#3aa756] transition-colors">
                 Privacy Policy
               </p>
@@ -229,7 +229,7 @@ export default function Footer() {
               >
                 Cookie Policy
               </Link>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

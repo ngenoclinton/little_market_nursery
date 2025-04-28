@@ -16,42 +16,42 @@ export default function HolidayClubGalleryPage() {
     {
       src: "/galleries/school-club-images/holiday-club/holiday5.jpg",
       alt: "Children at Adventure Island",
-      caption: "Fun day at Adventure Island",
+      caption: "",
     },
     {
       src: "/galleries/school-club-images/holiday-club/holiday4.jpg",
       alt: "Zoo trip",
-      caption: "Our trip to Colchester Zoo",
+      caption: "",
     },
     {
       src: "/galleries/school-club-images/holiday-club/holiday3.jpg",
       alt: "Arts and crafts",
-      caption: "Creative arts and crafts session",
+      caption: "",
     },
     {
       src: "/galleries/school-club-images/holiday-club/holiday2.jpg",
       alt: "Sports day",
-      caption: "Sports activities in the park",
+      caption: "",
     },
     {
       src: "/galleries/school-club-images/club-activities/IMG_3545.jpg",
       alt: "Swimming",
-      caption: "Swimming session at the local pool",
+      caption: "",
     },
     {
       src: "/galleries/school-club-images/club-activities/IMG_3546.jpg",
       alt: "Cooking class",
-      caption: "Learning to make healthy snacks",
+      caption: "",
     },
     {
       src: "/galleries/school-club-images/club-activities/IMG_3547.jpg",
       alt: "Museum visit",
-      caption: "Educational trip to the museum",
+      caption: "",
     },
     {
       src: "/galleries/school-club-images/club-activities/IMG_3564.jpg",
       alt: "Nature walk",
-      caption: "Exploring nature in the local park",
+      caption: "",
     },
   ]
 

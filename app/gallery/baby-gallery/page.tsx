@@ -4,47 +4,47 @@ const babyGalleryImages = [
   {
     src: "/galleries/nursery-images/babies/Jelly-Baby-Room-Sensory-Play-with-Pumpkins.webp",
     alt: "Baby 4",
-    caption: "Baby eating food.",
+    caption: "",
   },
   {
     src: "/galleries/nursery-images/babies/IMG_3675.webp",
     alt: "Baby 1",
-    caption: "Cute baby playing with toys.",
+    caption: "",
   },
   {
     src: "/galleries/nursery-images/babies/Jelly-Baby-Room-Babies-1.webp",
     alt: "Baby 2",
-    caption: "Smiling baby in a crib.",
+    caption: "",
   },
   {
     src: "/galleries/nursery-images/babies/Jelly-Baby-Room-Babies-4.webp",
     alt: "Baby 3",
-    caption: "Baby sleeping peacefully.",
+    caption: "",
   },
   {
     src: "/galleries/nursery-images/babies/Jelly-Baby-Room-Leaf-Painting-1.webp",
     alt: "Baby 4",
-    caption: "Baby eating food.",
+    caption: "",
   },
   {
     src: "/galleries/nursery-images/babies/Jelly-Baby-Room-Fun-Painting-Art-1.webp",
     alt: "Baby 5",
-    caption: "Baby crawling on the floor.",
+    caption: "",
   },
   {
     src: "/galleries/nursery-images/babies/Jelly-Baby-Room-Sand-Play.webp",
     alt: "Baby 6",
-    caption: "Baby with a teddy bear.",
+    caption: "",
   },
   {
     src: "/galleries/nursery-images/babies/Jelly-Baby-Room-Baby-Role-Play-1.webp",
     alt: "Baby 6",
-    caption: "Baby with a teddy bear.",
+    caption: "",
   },
   {
     src: "/galleries/nursery-images/babies/Jelly-Baby-Room-Nature-Feel-1.webp",
     alt: "Baby 6",
-    caption: "Baby with a teddy bear.",
+    caption: "",
   },
 ]
 

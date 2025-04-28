@@ -41,13 +41,13 @@ const Navbar = () => {
   const showContactBanner = (type: string) => {
     switch (type) {
       case "location":
-        setContactBanner("Little Market Nursery, 123 Education Avenue, Learning City, LC1 2ED")
+        setContactBanner("Kid's Promising Tomorrow, 123 Education Avenue, Learning City, LC1 2ED")
         break
       case "phone":
         setContactBanner("+44 1234 567890")
         break
       case "email":
-        setContactBanner("info@littlemarketnursery.edu")
+        setContactBanner("info@kidspromisingtomorrow.edu")
         break
       default:
         setContactBanner(null)
@@ -85,7 +85,7 @@ const Navbar = () => {
             <div className="flex items-center">
               <Link href="/" className="flex items-center">
                 <div className="relative h-24 w-24 md:h-28 md:w-28 lg:h-32 lg:w-32">
-                  <Image src="/Nursery-logo.png" alt="Little Market Nursery Logo" fill className="object-contain" />
+                  <Image src="/Nursery-logo.png" alt="Kid's Promising Tomorrow Logo" fill className="object-contain" />
                 </div>
                 <div className="ml-3">
                   <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-[#3aa756]">
@@ -150,8 +150,8 @@ const Navbar = () => {
       <div className="bg-[#3aa756] text-white">
         <div className="container mx-auto">
           {/* Desktop Navigation */}
-          <nav className="hidden md:block overflow-x-auto desktop-nav hide-scrollbar">
-            <ul className="flex justify-between min-w-max px-4">
+          <nav className="hidden md:block">
+            <ul className="flex justify-between">
               <li className="nav-item relative group">
                 <Link
                   href="/"
@@ -172,7 +172,7 @@ const Navbar = () => {
                 >
                   About Us
                 </Link>
-                <div className="dropdown-menu absolute left-0 top-full bg-white shadow-md min-w-[200px] z-10">
+                <div className="dropdown-menu absolute left-0 top-full bg-white shadow-md min-w-[200px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top scale-y-0 group-hover:scale-y-100 z-10 animate-fadeIn">
                   <Link
                     href="/about-us/our-story"
                     className="block py-3 px-4 text-[#3aa756] hover:bg-gray-100 hover:text-[#2d8444] border-b border-gray-200"
@@ -221,7 +221,7 @@ const Navbar = () => {
                 >
                   Curriculum
                 </Link>
-                <div className="dropdown-menu absolute left-0 top-full bg-white shadow-md min-w-[200px] z-10">
+                <div className="dropdown-menu absolute left-0 top-full bg-white shadow-md min-w-[200px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top scale-y-0 group-hover:scale-y-100 z-10 animate-fadeIn max-h-[300px] overflow-y-auto">
                   <Link
                     href="/curriculum/our-approach"
                     className="block py-3 px-4 text-[#3aa756] hover:bg-gray-100 hover:text-[#2d8444] border-b border-gray-200"
@@ -294,7 +294,7 @@ const Navbar = () => {
                 >
                   Key Information
                 </Link>
-                <div className="dropdown-menu absolute left-0 top-full bg-white shadow-md min-w-[200px] z-10">
+                <div className="dropdown-menu absolute left-0 top-full bg-white shadow-md min-w-[200px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top scale-y-0 group-hover:scale-y-100 z-10 animate-fadeIn max-h-[300px] overflow-y-auto">
                   <Link
                     href="/key-info/admissions"
                     className="block py-3 px-4 text-[#3aa756] hover:bg-gray-100 hover:text-[#2d8444] border-b border-gray-200"
@@ -343,7 +343,7 @@ const Navbar = () => {
                 >
                   Galleries
                 </Link>
-                <div className="dropdown-menu absolute left-0 top-full bg-white shadow-md min-w-[200px] z-10">
+                <div className="dropdown-menu absolute left-0 top-full bg-white shadow-md min-w-[200px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top scale-y-0 group-hover:scale-y-100 z-10 animate-fadeIn max-h-[300px] overflow-y-auto">
                   <Link
                     href="/gallery/baby-gallery"
                     className="block py-3 px-4 text-[#3aa756] hover:bg-gray-100 hover:text-[#2d8444] border-b border-gray-200"
@@ -391,7 +391,7 @@ const Navbar = () => {
                 >
                   Holiday Club
                 </Link>
-                <div className="dropdown-menu absolute left-0 top-full bg-white shadow-md min-w-[200px] z-10">
+                <div className="dropdown-menu absolute left-0 top-full bg-white shadow-md min-w-[200px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top scale-y-0 group-hover:scale-y-100 z-10 animate-fadeIn">
                   <Link
                     href="/holiday-club"
                     className="block py-3 px-4 text-[#3aa756] hover:bg-gray-100 hover:text-[#2d8444] border-b border-gray-200"
@@ -416,7 +416,7 @@ const Navbar = () => {
                 >
                   Contact Us
                 </Link>
-                <div className="dropdown-menu absolute right-0 top-full bg-white shadow-md min-w-[200px] z-10">
+                <div className="dropdown-menu absolute right-0 top-full bg-white shadow-md min-w-[200px] z-10 dropdown-menu-right opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top scale-y-0 group-hover:scale-y-100 animate-fadeIn max-h-[300px] overflow-y-auto">
                   <Link
                     href="/contact/arrange-visit"
                     className="block py-3 px-4 text-[#3aa756] hover:bg-gray-100 hover:text-[#2d8444] border-b border-gray-200"
@@ -454,10 +454,11 @@ const Navbar = () => {
           mobileMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
         style={{ top: "0", height: "100vh" }}
+        ref={mobileNavRef}
       >
         {/* Mobile Header */}
         <div className="flex justify-between items-center p-4 border-b flex-shrink-0">
-          <Link href="/" className="flex items-center">
+          <Link href="/" className="flex items-center" onClick={handleMobileLinkClick}>
             <div className="relative w-12 h-12 mr-2">
               <Image src="/Nursery-logo.png" alt="School Logo" fill className="object-contain" />
             </div>

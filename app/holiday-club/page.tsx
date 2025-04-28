@@ -284,7 +284,7 @@ export default function HolidayClubPage() {
         </div>
 
         <div className="mb-6">
-          <h3 className="text-xl font-bold text-[#ff6900] mb-4">Wraparound Care That Grows with Your Child</h3>
+          <h3 className="text-xl font-bold text-[#ff6900] mb-4">Wrap-around Care That Grows with Your Child</h3>
           <p className="text-lg mb-6">
             We operate popular Breakfast and After School Clubs from two convenient locations:
           </p>

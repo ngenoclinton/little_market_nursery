@@ -1,5 +1,5 @@
 "use client"
- 
+
 import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import Image from "next/image"
@@ -41,13 +41,13 @@ const Navbar = () => {
   const showContactBanner = (type: string) => {
     switch (type) {
       case "location":
-        setContactBanner("The Wykeham Centre, Market Place, Romford, RM1 3AB")
+        setContactBanner("Kid's Promising Tomorrow, 123 Education Avenue, Learning City, LC1 2ED")
         break
       case "phone":
-        setContactBanner("Nursery: Tel: 01708 608434 | Mobile: 07983 612443 || School Club: Tel: 01708 729186 | Mobile: 07495 190473")
+        setContactBanner("+44 1234 567890")
         break
       case "email":
-        setContactBanner("Nursery: admin@littlemarketnursery.co.uk || School Club: admin@littlemarketschoolclub.co.uk")
+        setContactBanner("info@kidspromisingtomorrow.edu")
         break
       default:
         setContactBanner(null)
@@ -66,8 +66,8 @@ const Navbar = () => {
     <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? "shadow-md" : ""}`}>
       {/* Contact Banner */}
       {contactBanner && (
-        <div className="bg-[#3aa756] text-white px-4 flex justify-between items-center">
-          <div className="flex items-center justify-end">
+        <div className="bg-[#3aa756] text-white py-2 px-4 flex justify-between items-center">
+          <div className="flex items-center">
             <MapPin size={16} className="mr-2" />
             <span>{contactBanner}</span>
           </div>
@@ -84,7 +84,7 @@ const Navbar = () => {
             {/* Logo and School Name */}
             <div className="flex items-center">
               <Link href="/" className="flex items-center">
-                <div className="relative h-24 w-24 md:h-28 md:w-28 lg:h-36 lg:w-36 -mt-6">
+                <div className="relative h-24 w-24 md:h-28 md:w-28 lg:h-32 lg:w-32 -mt-6">
                   <Image src="/Nursery-logo.png" alt="Kid's Promising Tomorrow Logo" fill className="object-contain" />
                 </div>
                 <div className="ml-3">
@@ -118,7 +118,18 @@ const Navbar = () => {
               >
                 <Mail size={20} />
               </button>
-             
+              <button
+                className="flex items-center justify-center w-10 h-10 bg-[#3aa756] text-white rounded-none hover:bg-[#2d8444] transition-colors"
+                aria-label="Search"
+              >
+                <Search size={20} />
+              </button>
+              <button
+                className="flex items-center justify-center w-10 h-10 bg-[#3aa756] text-white rounded-none hover:bg-[#2d8444] transition-colors"
+                aria-label="Language"
+              >
+                <Globe size={20} />
+              </button>
             </div>
 
             {/* Mobile Menu Button */}
@@ -161,7 +172,7 @@ const Navbar = () => {
                 >
                   About Us
                 </Link>
-                <div className="dropdown-menu absolute left-0 top-full bg-white shadow-md min-w-[200px] hidden group-hover:block z-10 animate-fadeIn">
+                <div className="dropdown-menu absolute left-0 top-full bg-white shadow-md min-w-[200px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top scale-y-0 group-hover:scale-y-100 z-10 animate-fadeIn">
                   <Link
                     href="/about-us/our-story"
                     className="block py-3 px-4 text-[#3aa756] hover:bg-gray-100 hover:text-[#2d8444] border-b border-gray-200"
@@ -180,12 +191,12 @@ const Navbar = () => {
                   >
                     Our Team
                   </Link>
-                  {/* <Link
+                  <Link
                     href="/about-us/facilities"
                     className="block py-3 px-4 text-[#3aa756] hover:bg-gray-100 hover:text-[#2d8444] border-b border-gray-200"
                   >
                     Facilities
-                  </Link> */}
+                  </Link>
                   <Link
                     href="/about-us/board-of-governors"
                     className="block py-3 px-4 text-[#3aa756] hover:bg-gray-100 hover:text-[#2d8444] border-b border-gray-200"
@@ -210,7 +221,7 @@ const Navbar = () => {
                 >
                   Curriculum
                 </Link>
-                <div className="dropdown-menu absolute left-0 top-full bg-white shadow-md min-w-[200px] hidden group-hover:block z-10 animate-fadeIn max-h-[300px] overflow-y-auto">
+                <div className="dropdown-menu absolute left-0 top-full bg-white shadow-md min-w-[200px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top scale-y-0 group-hover:scale-y-100 z-10 animate-fadeIn max-h-[300px] overflow-y-auto">
                   <Link
                     href="/curriculum/our-approach"
                     className="block py-3 px-4 text-[#3aa756] hover:bg-gray-100 hover:text-[#2d8444] border-b border-gray-200"
@@ -283,7 +294,7 @@ const Navbar = () => {
                 >
                   Key Information
                 </Link>
-                <div className="dropdown-menu absolute left-0 top-full bg-white shadow-md min-w-[200px] hidden group-hover:block z-10 animate-fadeIn max-h-[300px] overflow-y-auto">
+                <div className="dropdown-menu absolute left-0 top-full bg-white shadow-md min-w-[200px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top scale-y-0 group-hover:scale-y-100 z-10 animate-fadeIn max-h-[300px] overflow-y-auto">
                   <Link
                     href="/key-info/admissions"
                     className="block py-3 px-4 text-[#3aa756] hover:bg-gray-100 hover:text-[#2d8444] border-b border-gray-200"
@@ -332,7 +343,7 @@ const Navbar = () => {
                 >
                   Galleries
                 </Link>
-                <div className="dropdown-menu absolute left-0 top-full bg-white shadow-md min-w-[200px] hidden group-hover:block z-10 animate-fadeIn max-h-[300px] overflow-y-auto">
+                <div className="dropdown-menu absolute left-0 top-full bg-white shadow-md min-w-[200px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top scale-y-0 group-hover:scale-y-100 z-10 animate-fadeIn max-h-[300px] overflow-y-auto">
                   <Link
                     href="/gallery/baby-gallery"
                     className="block py-3 px-4 text-[#3aa756] hover:bg-gray-100 hover:text-[#2d8444] border-b border-gray-200"
@@ -380,7 +391,7 @@ const Navbar = () => {
                 >
                   Holiday Club
                 </Link>
-                <div className="dropdown-menu absolute left-0 top-full bg-white shadow-md min-w-[200px] hidden group-hover:block z-10 animate-fadeIn">
+                <div className="dropdown-menu absolute left-0 top-full bg-white shadow-md min-w-[200px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top scale-y-0 group-hover:scale-y-100 z-10 animate-fadeIn">
                   <Link
                     href="/holiday-club"
                     className="block py-3 px-4 text-[#3aa756] hover:bg-gray-100 hover:text-[#2d8444] border-b border-gray-200"
@@ -405,7 +416,7 @@ const Navbar = () => {
                 >
                   Contact Us
                 </Link>
-                <div className="dropdown-menu absolute left-0 top-full bg-white shadow-md min-w-[200px] hidden group-hover:block z-10 animate-fadeIn max-h-[300px] overflow-y-auto">
+                <div className="dropdown-menu absolute right-0 top-full bg-white shadow-md min-w-[200px] z-10 dropdown-menu-right opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top scale-y-0 group-hover:scale-y-100 animate-fadeIn max-h-[300px] overflow-y-auto">
                   <Link
                     href="/contact/arrange-visit"
                     className="block py-3 px-4 text-[#3aa756] hover:bg-gray-100 hover:text-[#2d8444] border-b border-gray-200"
@@ -443,10 +454,11 @@ const Navbar = () => {
           mobileMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
         style={{ top: "0", height: "100vh" }}
+        ref={mobileNavRef}
       >
         {/* Mobile Header */}
         <div className="flex justify-between items-center p-4 border-b flex-shrink-0">
-          <Link href="/" className="flex items-center">
+          <Link href="/" className="flex items-center" onClick={handleMobileLinkClick}>
             <div className="relative w-12 h-12 mr-2">
               <Image src="/Nursery-logo.png" alt="School Logo" fill className="object-contain" />
             </div>

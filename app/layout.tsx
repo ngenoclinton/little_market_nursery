@@ -11,11 +11,17 @@ const quicksand = Quicksand({
   variable: "--font-quicksand",
 })
 
-export const metadata: Metadata = {
-  title: "Little Market Nursery- Nurturing Young Minds",
-  description: "A nurturing environment for children to learn, grow, and thrive.",
+export const metadata = {
+  title: "Little Market Nursery",
+  description: "Nurturing Young Minds- Providing exceptional care and education for your children. A nurturing environment for children to learn, grow, and thrive.",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.png", type: "image/svg+xml" },
+    ],
+    apple: { url: "/apple-icon.png", sizes: "180x180" },
+  },
 }
-
 export default function RootLayout({
   children,
 }: Readonly<{
