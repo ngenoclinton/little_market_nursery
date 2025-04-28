@@ -73,12 +73,13 @@ export default function HolidayClubPage() {
             <li>Cinema</li>
           </ul>
         </div>
-        <div className="relative h-[400px] rounded-lg overflow-hidden shadow-lg">
+        <div className="relative w-full h-[300px] sm:h-[350px] md:h-[400px] rounded-lg overflow-hidden shadow-lg">
           <Image
             src="/galleries/school-club-images/holiday-club/camp.png"
             alt="Holiday Club Promotional Image"
             fill
-            className="object-cover"
+            className="object-cover"            
+            sizes="(max-width: 768px) 100vw, 50vw"
           />
         </div>
       </div>

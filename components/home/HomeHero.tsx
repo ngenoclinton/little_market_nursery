@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { ChevronDown } from "lucide-react"
 
 const slides = [
   {
@@ -35,7 +34,6 @@ const slides = [
   },
 ]
 
-
 const HomeHero = () => {
   const [currentSlide, setCurrentSlide] = useState(0)
 
@@ -43,12 +41,12 @@ const HomeHero = () => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length)
     }, 5000)
-    
+
     return () => clearInterval(interval)
   }, [])
 
   return (
-    <section className="relative h-[100vh] w-full overflow-hidden">
+    <section className="relative w-full min-h-screen flex flex-col">
       {/* Carousel */}
       {slides.map((slide, index) => (
         <div
@@ -56,6 +54,7 @@ const HomeHero = () => {
           className={`absolute inset-0 transition-opacity duration-1000 ${
             index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"
           }`}
+          style={{ top: 0, bottom: 0, left: 0, right: 0 }}
         >
           <Image
             src={slide.image || "/placeholder.svg"}
@@ -63,14 +62,15 @@ const HomeHero = () => {
             fill
             priority={index === 0}
             className="object-cover"
+            sizes="100vw"
           />
-          <div className="absolute inset-0 bg-black/10 bg-opacity-40" />
+          <div className="absolute inset-0 bg-black/40" />
         </div>
       ))}
 
       {/* Content */}
-      <div className="relative z-20 container mx-auto px-4 h-full flex flex-col justify-center items-start">
-        <div className="max-w-2xl text-white pt-20">
+      <div className="relative z-20 container mx-auto px-4 flex-grow flex flex-col justify-center items-start">
+        <div className="max-w-2xl text-white">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
             Every Child Deserves The Best Possible Start!
           </h1>

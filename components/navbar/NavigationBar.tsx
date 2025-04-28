@@ -41,13 +41,13 @@ const Navbar = () => {
   const showContactBanner = (type: string) => {
     switch (type) {
       case "location":
-        setContactBanner("Kid's Promising Tomorrow, 123 Education Avenue, Learning City, LC1 2ED")
+        setContactBanner("Little Market Day Nursery The Wykeham Centre Market Place, Romford RM1 3AB GB")
         break
       case "phone":
-        setContactBanner("+44 1234 567890")
+        setContactBanner("Nursery: Tel: 01708 608434 | Mobile: 07983 612443 || School Club: Tel: 01708 729186 | Mobile: 07495 190473")
         break
       case "email":
-        setContactBanner("info@kidspromisingtomorrow.edu")
+        setContactBanner("Nursery: admin@littlemarketnursery.co.uk || School Club: admin@littlemarketschoolclub.co.uk")
         break
       default:
         setContactBanner(null)
@@ -58,7 +58,7 @@ const Navbar = () => {
     setMobileMenuOpen(false)
     // Reset all dropdowns
     setActiveDropdowns({})
-    // Scroll to top of the page
+    // Scroll to top of the page  
     window.scrollTo(0, 0)
   }
 
@@ -66,7 +66,7 @@ const Navbar = () => {
     <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? "shadow-md" : ""}`}>
       {/* Contact Banner */}
       {contactBanner && (
-        <div className="bg-[#3aa756] text-white py-2 px-4 flex justify-between items-center">
+        <div className="bg-[#3aa756] text-white text-base py-2 px-4 flex justify-between items-center">
           <div className="flex items-center">
             <MapPin size={16} className="mr-2" />
             <span>{contactBanner}</span>
@@ -118,7 +118,7 @@ const Navbar = () => {
               >
                 <Mail size={20} />
               </button>
-              <button
+              {/* <button
                 className="flex items-center justify-center w-10 h-10 bg-[#3aa756] text-white rounded-none hover:bg-[#2d8444] transition-colors"
                 aria-label="Search"
               >
@@ -129,7 +129,7 @@ const Navbar = () => {
                 aria-label="Language"
               >
                 <Globe size={20} />
-              </button>
+              </button> */}
             </div>
 
             {/* Mobile Menu Button */}
@@ -191,12 +191,12 @@ const Navbar = () => {
                   >
                     Our Team
                   </Link>
-                  <Link
+                  {/* <Link
                     href="/about-us/facilities"
                     className="block py-3 px-4 text-[#3aa756] hover:bg-gray-100 hover:text-[#2d8444] border-b border-gray-200"
                   >
                     Facilities
-                  </Link>
+                  </Link> */}
                   <Link
                     href="/about-us/board-of-governors"
                     className="block py-3 px-4 text-[#3aa756] hover:bg-gray-100 hover:text-[#2d8444] border-b border-gray-200"
@@ -533,7 +533,7 @@ const Navbar = () => {
                       Our Team
                     </Link>
                   </li>
-                  <li>
+                  {/* <li>
                     <Link
                       href="/about-us/facilities"
                       className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
@@ -541,7 +541,7 @@ const Navbar = () => {
                     >
                       Facilities
                     </Link>
-                  </li>
+                  </li> */}
                   <li>
                     <Link
                       href="/about-us/board-of-governors"

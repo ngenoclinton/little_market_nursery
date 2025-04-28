@@ -7,9 +7,7 @@ export default function WelcomeSection() {
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="order-2 md:order-1">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#3aa756]">
-              Welcome to Little Market Nursery
-            </h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#3aa756]">Welcome to Little Market Nursery</h2>
             <p className="text-gray-700 mb-6 text-lg">
               At Little Market Nursery, we believe every child deserves the best start in life. Our nurturing
               environment encourages curiosity, creativity, and confidence in young learners.
@@ -34,12 +32,13 @@ export default function WelcomeSection() {
             </div>
           </div>
           <div className="order-1 md:order-2 relative">
-            <div className="relative h-[400px] md:h-[500px] rounded-lg overflow-hidden shadow-xl">
+            <div className="relative w-full h-[300px] sm:h-[350px] md:h-[400px] lg:h-[500px] rounded-lg overflow-hidden shadow-xl">
               <Image
                 src="/images/homeImg/camp.png"
                 alt="Teacher helping children with activities"
                 fill
                 className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
               />
             </div>
             <div className="absolute -bottom-6 -left-6 bg-[#df2020] text-white p-4 rounded-lg shadow-lg">
