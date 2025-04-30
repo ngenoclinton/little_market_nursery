@@ -44,7 +44,9 @@ const Navbar = () => {
         setContactBanner("Little Market Day Nursery The Wykeham Centre Market Place, Romford RM1 3AB GB")
         break
       case "phone":
-        setContactBanner("Nursery: Tel: 01708 608434 | Mobile: 07983 612443 || School Club: Tel: 01708 729186 | Mobile: 07495 190473")
+        setContactBanner(
+          "Nursery: Tel: 01708 608434 | Mobile: 07983 612443 || School Club: Tel: 01708 729186 | Mobile: 07495 190473",
+        )
         break
       case "email":
         setContactBanner("Nursery: admin@littlemarketnursery.co.uk || School Club: admin@littlemarketschoolclub.co.uk")
@@ -58,7 +60,7 @@ const Navbar = () => {
     setMobileMenuOpen(false)
     // Reset all dropdowns
     setActiveDropdowns({})
-    // Scroll to top of the page  
+    // Scroll to top of the page
     window.scrollTo(0, 0)
   }
 
@@ -118,18 +120,6 @@ const Navbar = () => {
               >
                 <Mail size={20} />
               </button>
-              {/* <button
-                className="flex items-center justify-center w-10 h-10 bg-[#3aa756] text-white rounded-none hover:bg-[#2d8444] transition-colors"
-                aria-label="Search"
-              >
-                <Search size={20} />
-              </button>
-              <button
-                className="flex items-center justify-center w-10 h-10 bg-[#3aa756] text-white rounded-none hover:bg-[#2d8444] transition-colors"
-                aria-label="Language"
-              >
-                <Globe size={20} />
-              </button> */}
             </div>
 
             {/* Mobile Menu Button */}
@@ -191,12 +181,6 @@ const Navbar = () => {
                   >
                     Our Team
                   </Link>
-                  {/* <Link
-                    href="/about-us/facilities"
-                    className="block py-3 px-4 text-[#3aa756] hover:bg-gray-100 hover:text-[#2d8444] border-b border-gray-200"
-                  >
-                    Facilities
-                  </Link> */}
                   <Link
                     href="/about-us/board-of-governors"
                     className="block py-3 px-4 text-[#3aa756] hover:bg-gray-100 hover:text-[#2d8444] border-b border-gray-200"
@@ -208,6 +192,68 @@ const Navbar = () => {
                     className="block py-3 px-4 text-[#3aa756] hover:bg-gray-100 hover:text-[#2d8444]"
                   >
                     Our Prospectus
+                  </Link>
+                </div>
+              </li>
+
+              {/* After School Club - New position after About Us */}
+              <li className="nav-item relative group">
+                <Link
+                  href="/after-school-club"
+                  className={`block px-4 py-4 text-center hover:bg-[#2d8444] transition-colors relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-1 after:bg-white after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 ${
+                    pathname.startsWith("/after-school-club") ? "after:scale-x-100 bg-[#2d8444]" : ""
+                  }`}
+                >
+                  After School Club
+                </Link>
+                <div className="dropdown-menu absolute left-0 top-full bg-white shadow-md min-w-[200px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top scale-y-0 group-hover:scale-y-100 z-10 animate-fadeIn max-h-[400px] overflow-y-auto">
+                  <Link
+                    href="/after-school-club"
+                    className="block py-3 px-4 text-[#3aa756] hover:bg-gray-100 hover:text-[#2d8444] border-b border-gray-200"
+                  >
+                    Overview
+                  </Link>
+                  <Link
+                    href="/after-school-club/holiday-club"
+                    className="block py-3 px-4 text-[#3aa756] hover:bg-gray-100 hover:text-[#2d8444] border-b border-gray-200"
+                  >
+                    Holiday Club
+                  </Link>
+                  <Link
+                    href="/after-school-club/activities"
+                    className="block py-3 px-4 text-[#3aa756] hover:bg-gray-100 hover:text-[#2d8444] border-b border-gray-200"
+                  >
+                    Activities
+                  </Link>
+                  <Link
+                    href="/after-school-club/registration"
+                    className="block py-3 px-4 text-[#3aa756] hover:bg-gray-100 hover:text-[#2d8444] border-b border-gray-200"
+                  >
+                    Registration
+                  </Link>
+                  <Link
+                    href="/after-school-club/fees"
+                    className="block py-3 px-4 text-[#3aa756] hover:bg-gray-100 hover:text-[#2d8444] border-b border-gray-200"
+                  >
+                    Fees
+                  </Link>
+                  <Link
+                    href="/after-school-club/gallery"
+                    className="block py-3 px-4 text-[#3aa756] hover:bg-gray-100 hover:text-[#2d8444] border-b border-gray-200"
+                  >
+                    Gallery
+                  </Link>
+                  <Link
+                    href="/after-school-club/testimonials"
+                    className="block py-3 px-4 text-[#3aa756] hover:bg-gray-100 hover:text-[#2d8444] border-b border-gray-200"
+                  >
+                    Testimonials
+                  </Link>
+                  <Link
+                    href="/after-school-club/contact"
+                    className="block py-3 px-4 text-[#3aa756] hover:bg-gray-100 hover:text-[#2d8444]"
+                  >
+                    Contact
                   </Link>
                 </div>
               </li>
@@ -245,18 +291,6 @@ const Navbar = () => {
                     className="block py-3 px-4 text-[#3aa756] hover:bg-gray-100 hover:text-[#2d8444] border-b border-gray-200"
                   >
                     3–5 Years (Preschoolers)
-                  </Link>
-                  <Link
-                    href="/curriculum/after-school-club"
-                    className="block py-3 px-4 text-[#3aa756] hover:bg-gray-100 hover:text-[#2d8444] border-b border-gray-200"
-                  >
-                    After School Club
-                  </Link>
-                  <Link
-                    href="/curriculum/holiday-club"
-                    className="block py-3 px-4 text-[#3aa756] hover:bg-gray-100 hover:text-[#2d8444] border-b border-gray-200"
-                  >
-                    Holiday Club
                   </Link>
                   <Link
                     href="/curriculum/learning-tools"
@@ -380,31 +414,6 @@ const Navbar = () => {
                 >
                   Funding
                 </Link>
-              </li>
-
-              <li className="nav-item relative group">
-                <Link
-                  href="/holiday-club"
-                  className={`block px-4 py-4 text-center hover:bg-[#2d8444] transition-colors relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-1 after:bg-white after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 ${
-                    pathname.startsWith("/holiday-club") ? "after:scale-x-100 bg-[#2d8444]" : ""
-                  }`}
-                >
-                  Holiday Club
-                </Link>
-                <div className="dropdown-menu absolute left-0 top-full bg-white shadow-md min-w-[200px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top scale-y-0 group-hover:scale-y-100 z-10 animate-fadeIn">
-                  <Link
-                    href="/holiday-club"
-                    className="block py-3 px-4 text-[#3aa756] hover:bg-gray-100 hover:text-[#2d8444] border-b border-gray-200"
-                  >
-                    Information
-                  </Link>
-                  <Link
-                    href="/holiday-club/gallery"
-                    className="block py-3 px-4 text-[#3aa756] hover:bg-gray-100 hover:text-[#2d8444]"
-                  >
-                    Gallery
-                  </Link>
-                </div>
               </li>
 
               <li className="nav-item relative group">
@@ -533,15 +542,6 @@ const Navbar = () => {
                       Our Team
                     </Link>
                   </li>
-                  {/* <li>
-                    <Link
-                      href="/about-us/facilities"
-                      className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
-                      onClick={handleMobileLinkClick}
-                    >
-                      Facilities
-                    </Link>
-                  </li> */}
                   <li>
                     <Link
                       href="/about-us/board-of-governors"
@@ -558,6 +558,105 @@ const Navbar = () => {
                       onClick={handleMobileLinkClick}
                     >
                       Our Prospectus
+                    </Link>
+                  </li>
+                </ul>
+              </li>
+
+              {/* After School Club Mobile Menu Item */}
+              <li className="border-b border-gray-100">
+                <div
+                  className={`flex justify-between items-center py-3 px-4 text-lg font-medium ${
+                    pathname.startsWith("/after-school-club")
+                      ? "text-[#3aa756] bg-gray-100"
+                      : "text-gray-800"
+                        ? "text-[#3aa756] bg-gray-100"
+                        : "text-gray-800"
+                  } hover:text-[#3aa756] hover:bg-gray-50 rounded-md cursor-pointer`}
+                  onClick={() => toggleDropdown("after-school-club")}
+                >
+                  <span>After School Club</span>
+                  {activeDropdowns["after-school-club"] ? (
+                    <ChevronDown className="h-5 w-5 transition-transform duration-200" />
+                  ) : (
+                    <ChevronRight className="h-5 w-5 transition-transform duration-200" />
+                  )}
+                </div>
+                <ul
+                  className={`pl-4 mt-1 space-y-1 overflow-hidden transition-all duration-300 custom-scrollbar ${
+                    activeDropdowns["after-school-club"] ? "max-h-[40vh] overflow-y-auto pb-2" : "max-h-0"
+                  }`}
+                >
+                  <li>
+                    <Link
+                      href="/after-school-club"
+                      className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
+                      onClick={handleMobileLinkClick}
+                    >
+                      Overview
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/after-school-club/holiday-club"
+                      className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
+                      onClick={handleMobileLinkClick}
+                    >
+                      Holiday Club
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/after-school-club/activities"
+                      className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
+                      onClick={handleMobileLinkClick}
+                    >
+                      Activities
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/after-school-club/registration"
+                      className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
+                      onClick={handleMobileLinkClick}
+                    >
+                      Registration
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/after-school-club/fees"
+                      className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
+                      onClick={handleMobileLinkClick}
+                    >
+                      Fees
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/after-school-club/gallery"
+                      className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
+                      onClick={handleMobileLinkClick}
+                    >
+                      Gallery
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/after-school-club/testimonials"
+                      className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
+                      onClick={handleMobileLinkClick}
+                    >
+                      Testimonials
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/after-school-club/contact"
+                      className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
+                      onClick={handleMobileLinkClick}
+                    >
+                      Contact
                     </Link>
                   </li>
                 </ul>
@@ -616,24 +715,6 @@ const Navbar = () => {
                       onClick={handleMobileLinkClick}
                     >
                       3–5 Years (Preschoolers)
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/curriculum/after-school-club"
-                      className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
-                      onClick={handleMobileLinkClick}
-                    >
-                      After School Club
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/curriculum/holiday-club"
-                      className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
-                      onClick={handleMobileLinkClick}
-                    >
-                      Holiday Club
                     </Link>
                   </li>
                   <li>
@@ -819,46 +900,6 @@ const Navbar = () => {
                 >
                   Funding
                 </Link>
-              </li>
-
-              <li className="border-b border-gray-100">
-                <div
-                  className={`flex justify-between items-center py-3 px-4 text-lg font-medium ${
-                    pathname.startsWith("/holiday-club") ? "text-[#3aa756] bg-gray-100" : "text-gray-800"
-                  } hover:text-[#3aa756] hover:bg-gray-50 rounded-md cursor-pointer`}
-                  onClick={() => toggleDropdown("holiday-club")}
-                >
-                  <span>Holiday Club</span>
-                  {activeDropdowns["holiday-club"] ? (
-                    <ChevronDown className="h-5 w-5 transition-transform duration-200" />
-                  ) : (
-                    <ChevronRight className="h-5 w-5 transition-transform duration-200" />
-                  )}
-                </div>
-                <ul
-                  className={`pl-4 mt-1 space-y-1 overflow-hidden transition-all duration-300 custom-scrollbar ${
-                    activeDropdowns["holiday-club"] ? "max-h-60 overflow-y-auto" : "max-h-0"
-                  }`}
-                >
-                  <li>
-                    <Link
-                      href="/holiday-club"
-                      className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
-                      onClick={handleMobileLinkClick}
-                    >
-                      Information
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/holiday-club/gallery"
-                      className="block py-2 px-4 text-gray-600 hover:text-[#3aa756] hover:bg-gray-50 rounded-md"
-                      onClick={handleMobileLinkClick}
-                    >
-                      Gallery
-                    </Link>
-                  </li>
-                </ul>
               </li>
 
               <li className="border-b border-gray-100">

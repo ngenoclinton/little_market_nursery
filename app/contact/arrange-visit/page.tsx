@@ -4,7 +4,7 @@ import type React from "react"
 
 import { useState } from "react"
 import FormInput from "@/components/form-input"
-
+import {sendArrangeVisitForm} from "@/lib/api"
 export default function ArrangeVisitPage() {
   const [formData, setFormData] = useState({
     name: "",
@@ -28,11 +28,13 @@ export default function ArrangeVisitPage() {
     setIsSubmitting(true)
 
     // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+    // await new Promise((resolve) => setTimeout(resolve, 1000))
+    await sendArrangeVisitForm(formData); 
 
     console.log("Form submitted:", formData)
     setIsSubmitting(false)
     setIsSubmitted(true)
+
     setFormData({
       name: "",
       phone: "",
