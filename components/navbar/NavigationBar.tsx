@@ -11,7 +11,7 @@ const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [activeDropdowns, setActiveDropdowns] = useState<Record<string, boolean>>({})
   const [contactBanner, setContactBanner] = useState<string | null>(null)
-  const pathname = usePathname()
+  const pathname = usePathname() ?? ""
   const mobileNavRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -570,8 +570,6 @@ const Navbar = () => {
                     pathname.startsWith("/after-school-club")
                       ? "text-[#3aa756] bg-gray-100"
                       : "text-gray-800"
-                        ? "text-[#3aa756] bg-gray-100"
-                        : "text-gray-800"
                   } hover:text-[#3aa756] hover:bg-gray-50 rounded-md cursor-pointer`}
                   onClick={() => toggleDropdown("after-school-club")}
                 >
