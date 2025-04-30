@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation"
 import { ChevronRight } from "lucide-react"
 
 export default function AfterSchoolClubBreadcrumb() {
-  const pathname = usePathname() ?? ""
+  const pathname = usePathname() as string
 
   // Format the path segments for display
   const formatPathSegment = (segment: string) => {
