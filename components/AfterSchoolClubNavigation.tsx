@@ -6,7 +6,8 @@ import { usePathname } from "next/navigation"
 import { ChevronDown, ChevronRight } from "lucide-react"
 
 export default function AfterSchoolClubNavigation() {
-  const pathname = usePathname() ?? ""
+  const pathname = usePathname() as string
+  
   const [isGalleryExpanded, setIsGalleryExpanded] = useState(pathname.startsWith("/after-school-club/gallery"))
 
   const isActive = (path: string) => pathname === path

@@ -11,7 +11,7 @@ const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [activeDropdowns, setActiveDropdowns] = useState<Record<string, boolean>>({})
   const [contactBanner, setContactBanner] = useState<string | null>(null)
-  const pathname = usePathname() ?? ""
+  const pathname = usePathname() as string
   const mobileNavRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
