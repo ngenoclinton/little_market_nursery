@@ -6,7 +6,7 @@ import { ChevronRight } from "lucide-react"
 
 export default function AfterSchoolClubBreadcrumb() {
   const pathname = usePathname()
-  
+
   if (!pathname) return null // Safely handle null case
 
   // Format the path segments for display
@@ -24,7 +24,7 @@ export default function AfterSchoolClubBreadcrumb() {
 
   // Generate breadcrumb items
   const generateBreadcrumbs = () => {
-    const segments = pathname.split("/").filter(Boolean)
+  const segments = (pathname ?? "").split("/").filter(Boolean)
 
     return segments.map((segment, index) => {
       const href = `/${segments.slice(0, index + 1).join("/")}`
