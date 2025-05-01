@@ -7,8 +7,10 @@ import { ChevronRight } from "lucide-react"
 export default function Breadcrumb() {
   const pathname = usePathname()
 
-  if (pathname === "/") return null
+  // Early return if pathname is null or homepage
+  if (pathname === null || pathname === "/") return null
 
+  // Now TypeScript knows pathname is a string (not null)
   const pathSegments = pathname.split("/").filter(Boolean)
 
   return (
