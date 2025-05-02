@@ -130,11 +130,11 @@ const Navbar = () => {
             <div className="flex items-center">
               <Link href="/" className="flex items-center">
                 <div className="relative h-24 w-24 md:h-28 md:w-28 lg:h-32 lg:w-32 -mt-6">
-                  <Image src="/Nursery-logo.png" alt="Kid's Promising Tomorrow Logo" fill className="object-contain" />
+                  <Image src="/logo.jpg" alt="Kid's Promising Tomorrow Logo" fill className="object-contain" />
                 </div>
-                <div className="ml-3">
-                  <h1 className="text-lg md:text-2xl lg:text-3xl font-bold text-[#3aa756]">
-                    Little Market <span className="text-[#df2020]">Nursery</span>
+                <div className="ml-2">
+                  <h1 className="text-sm md:text-xl lg:text-2xl font-bold text-[#3aa756]">
+                    Little Market <span className="text-[#df2020]">Nursery & School Club</span>
                   </h1>
                 </div>
               </Link>
@@ -496,7 +496,7 @@ const Navbar = () => {
             <div className="relative w-12 h-12 mr-2">
               <Image src="/logo.jpg" alt="School Logo" fill className="object-contain" />
             </div>
-            <h1 className="text-xl font-bold text-[#3aa756]">
+            <h1 className="text-lg font-bold text-[#3aa756]">
               Little Market <span className="text-[#df2020]">Nursery & School Club</span>
             </h1>
           </Link>
