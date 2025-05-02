@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss"
+const animatePlugin = require('tailwindcss-animatecss')
 
 const config: Config = {
   content: [
@@ -92,6 +93,9 @@ const config: Config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    animatePlugin({
+    classes: ['animate__animated', 'animate__fadeIn', 'animate__bounce'],
+  }),],
 }
 export default config

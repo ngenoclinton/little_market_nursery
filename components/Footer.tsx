@@ -216,20 +216,20 @@ export default function Footer() {
                 iRob Technologies.
               </Link>
             </p>
-            {/* <div className="flex space-x-4 mt-4 md:mt-0">
+            <div className="flex space-x-4 mt-4 md:mt-0">
               <p className="text-gray-500 text-sm hover:text-[#3aa756] transition-colors">
                 Privacy Policy
               </p>
               <p className="text-gray-500 text-sm hover:text-[#3aa756] transition-colors">
                 Terms of Service
               </p>
-              <Link
+              {/* <Link
                 href="/cookie-policy"
                 className="text-gray-500 text-sm hover:text-[#3aa756] transition-colors"
               >
                 Cookie Policy
-              </Link>
-            </div> */}
+              </Link> */}
+            </div>
           </div>
         </div>
       </div>
