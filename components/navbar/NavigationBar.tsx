@@ -130,7 +130,7 @@ const Navbar = () => {
             <div className="flex items-center">
               <Link href="/" className="flex items-center">
                 <div className="relative h-24 w-24 md:h-28 md:w-28 lg:h-32 lg:w-32 -mt-6">
-                  <Image src="/logo.jpg" alt="Kid's Promising Tomorrow Logo" fill className="object-contain" />
+                  <Image src="/logo.jpg" alt="Little Market Logo" fill className="object-contain" />
                 </div>
                 <div className="ml-2">
                   <h1 className="text-sm md:text-xl lg:text-2xl font-bold text-[#3aa756]">

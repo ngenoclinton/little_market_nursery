@@ -2,7 +2,8 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -11,22 +12,254 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { CheckCircle, FileText, Download } from "lucide-react"
-import Link from "next/link"
+import { CheckCircle, FileText, Download, Loader2 } from "lucide-react"
+import { initEmailJS, sendFormData, EMAIL_TEMPLATES } from "@/lib/afterschool/emailjs"
+import { useToast } from "@/hooks/use-toast"
 
-// export const metadata = {
-//   title: "Register Your Child | After School Club | Little Market Nursery",
-//   description: "Register your child for our After School Club with our simple online form.",
-// }
-
-export default function RegisterPage() {
+export default function RegisterClientPage() {
   const [formSubmitted, setFormSubmitted] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [activeTab, setActiveTab] = useState("after-school")
+  const { toast } = useToast()
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [afterSchoolFormData, setAfterSchoolFormData] = useState({
+    childFirstName: "",
+    childLastName: "",
+    childDob: "",
+    childSchool: "",
+    childClass: "",
+    parentFirstName: "",
+    parentLastName: "",
+    parentRelationship: "",
+    parentEmail: "",
+    parentPhone: "",
+    parentAddress: "",
+    location: "concordia",
+    days: {
+      monday: false,
+      tuesday: false,
+      wednesday: false,
+      thursday: false,
+      friday: false,
+    },
+    startDate: "",
+    medical: "",
+    additionalInfo: "",
+    terms: false,
+    photoConsent: false,
+    privacy: false,
+  })
+
+  const [holidayFormData, setHolidayFormData] = useState({
+    childFirstName: "",
+    childLastName: "",
+    childDob: "",
+    childSchool: "",
+    parentFirstName: "",
+    parentLastName: "",
+    parentEmail: "",
+    parentPhone: "",
+    location: "concordia",
+    holidayPeriod: "",
+    days: {
+      monday: false,
+      tuesday: false,
+      wednesday: false,
+      thursday: false,
+      friday: false,
+    },
+    sessionType: "full-day",
+    medical: "",
+    terms: false,
+    photoConsent: false,
+    privacy: false,
+  })
+
+  useEffect(() => {
+    // Initialize EmailJS when component mounts
+    initEmailJS()
+  }, [])
+
+  const handleAfterSchoolInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { id, value, type, checked } = e.target as HTMLInputElement
+
+    if (type === "checkbox") {
+      if (
+        id.startsWith("monday") ||
+        id.startsWith("tuesday") ||
+        id.startsWith("wednesday") ||
+        id.startsWith("thursday") ||
+        id.startsWith("friday")
+      ) {
+        setAfterSchoolFormData((prev) => ({
+          ...prev,
+          days: {
+            ...prev.days,
+            [id]: checked,
+          },
+        }))
+      } else {
+        setAfterSchoolFormData((prev) => ({
+          ...prev,
+          [id]: checked,
+        }))
+      }
+    } else {
+      setAfterSchoolFormData((prev) => ({
+        ...prev,
+        [id]: value,
+      }))
+    }
+  }
+
+  const handleHolidayInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { id, value, type, checked } = e.target as HTMLInputElement
+
+    if (type === "checkbox") {
+      if (
+        id.startsWith("hc-monday") ||
+        id.startsWith("hc-tuesday") ||
+        id.startsWith("hc-wednesday") ||
+        id.startsWith("hc-thursday") ||
+        id.startsWith("hc-friday")
+      ) {
+        const dayKey = id.replace("hc-", "")
+        setHolidayFormData((prev) => ({
+          ...prev,
+          days: {
+            ...prev.days,
+            [dayKey]: checked,
+          },
+        }))
+      } else {
+        const fieldName = id.replace("hc-", "")
+        setHolidayFormData((prev) => ({
+          ...prev,
+          [fieldName]: checked,
+        }))
+      }
+    } else {
+      const fieldName = id.replace("hc-", "")
+      setHolidayFormData((prev) => ({
+        ...prev,
+        [fieldName]: value,
+      }))
+    }
+  }
+
+  const handleAfterSchoolSelectChange = (id: string, value: string) => {
+    setAfterSchoolFormData((prev) => ({
+      ...prev,
+      [id]: value,
+    }))
+  }
+
+  const handleHolidaySelectChange = (id: string, value: string) => {
+    const fieldName = id.replace("hc-", "")
+    setHolidayFormData((prev) => ({
+      ...prev,
+      [fieldName]: value,
+    }))
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // In a real application, you would handle the form submission here
-    // For this example, we'll just show a success message
-    setFormSubmitted(true)
+    setIsSubmitting(true)
+
+    try {
+      let emailData
+
+      if (activeTab === "after-school") {
+        // Format the days for email
+        const selectedDays = Object.entries(afterSchoolFormData.days)
+          .filter(([_, selected]) => selected)
+          .map(([day]) => day.charAt(0).toUpperCase() + day.slice(1))
+          .join(", ")
+
+        emailData = {
+          form_type: "After School Club Registration",
+          child_first_name: afterSchoolFormData.childFirstName,
+          child_last_name: afterSchoolFormData.childLastName,
+          child_dob: afterSchoolFormData.childDob,
+          child_school: afterSchoolFormData.childSchool,
+          child_class: afterSchoolFormData.childClass,
+          parent_first_name: afterSchoolFormData.parentFirstName,
+          parent_last_name: afterSchoolFormData.parentLastName,
+          parent_relationship: afterSchoolFormData.parentRelationship,
+          parent_email: afterSchoolFormData.parentEmail,
+          parent_phone: afterSchoolFormData.parentPhone,
+          parent_address: afterSchoolFormData.parentAddress,
+          location: afterSchoolFormData.location === "concordia" ? "Concordia Academy" : "Wykeham Hall",
+          days_required: selectedDays || "None selected",
+          start_date: afterSchoolFormData.startDate,
+          medical_info: afterSchoolFormData.medical || "None provided",
+          additional_info: afterSchoolFormData.additionalInfo || "None provided",
+          photo_consent: afterSchoolFormData.photoConsent ? "Yes" : "No",
+        }
+      } else {
+        // Format the days for email
+        const selectedDays = Object.entries(holidayFormData.days)
+          .filter(([_, selected]) => selected)
+          .map(([day]) => day.charAt(0).toUpperCase() + day.slice(1))
+          .join(", ")
+
+        let sessionTypeText
+        switch (holidayFormData.sessionType) {
+          case "full-day":
+            sessionTypeText = "Full Day (8:00 AM - 6:00 PM)"
+            break
+          case "morning":
+            sessionTypeText = "Morning Only (8:00 AM - 1:00 PM)"
+            break
+          case "afternoon":
+            sessionTypeText = "Afternoon Only (1:00 PM - 6:00 PM)"
+            break
+          default:
+            sessionTypeText = holidayFormData.sessionType
+        }
+
+        emailData = {
+          form_type: "Holiday Club Registration",
+          child_first_name: holidayFormData.childFirstName,
+          child_last_name: holidayFormData.childLastName,
+          child_dob: holidayFormData.childDob,
+          child_school: holidayFormData.childSchool,
+          parent_first_name: holidayFormData.parentFirstName,
+          parent_last_name: holidayFormData.parentLastName,
+          parent_email: holidayFormData.parentEmail,
+          parent_phone: holidayFormData.parentPhone,
+          location: holidayFormData.location === "concordia" ? "Concordia Academy" : "Wykeham Hall",
+          holiday_period: holidayFormData.holidayPeriod,
+          days_required: selectedDays || "None selected",
+          session_type: sessionTypeText
+        }
+      }
+
+      const result = await sendFormData(process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID as string, emailData)
+
+      if (result.success) {
+        setFormSubmitted(true)
+        toast({
+          title: "Registration Submitted",
+          description: "Your registration has been sent successfully.",
+        })
+      } else {
+        toast({
+          title: "Submission Failed",
+          description: "There was a problem sending your registration. Please try again.",
+          variant: "destructive",
+        })
+      }
+    } catch (error) {
+      console.error("Form submission error:", error)
+      toast({
+        title: "Submission Error",
+        description: "An unexpected error occurred. Please try again later.",
+        variant: "destructive",
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   if (formSubmitted) {
@@ -79,49 +312,75 @@ export default function RegisterPage() {
         </p>
       </div>
 
-      <Tabs defaultValue="after-school" className="w-full mb-8">
+      <Tabs defaultValue="after-school" className="w-full mb-8" value={activeTab} onValueChange={setActiveTab}>
         <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="after-school">After School Club</TabsTrigger>
           <TabsTrigger value="holiday">Holiday Club</TabsTrigger>
         </TabsList>
 
         <TabsContent value="after-school" className="mt-6">
-          <Card className="py-0">
-            <CardHeader className="bg-[#3aa756] text-white text-lg md:text-xl lg:text-2xl p-4">
+          <Card>
+            <CardHeader className="bg-[#3aa756] text-white">
               <CardTitle>After School Club Registration</CardTitle>
               <CardDescription className="text-white/80">
                 All fields marked with an asterisk (*) are required
               </CardDescription>
             </CardHeader>
-            <CardContent className="py-5">
+            <CardContent className="pt-6">
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="space-y-4">
                   <h3 className="text-lg font-semibold text-[#3aa756]">Child's Information</h3>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <Label htmlFor="child-first-name">First Name *</Label>
-                      <Input id="child-first-name" required />
+                      <Label htmlFor="childFirstName">First Name *</Label>
+                      <Input
+                        id="childFirstName"
+                        value={afterSchoolFormData.childFirstName}
+                        onChange={handleAfterSchoolInputChange}
+                        required
+                      />
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="child-last-name">Last Name *</Label>
-                      <Input id="child-last-name" required />
+                      <Label htmlFor="childLastName">Last Name *</Label>
+                      <Input
+                        id="childLastName"
+                        value={afterSchoolFormData.childLastName}
+                        onChange={handleAfterSchoolInputChange}
+                        required
+                      />
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="child-dob">Date of Birth *</Label>
-                      <Input id="child-dob" type="date" required />
+                      <Label htmlFor="childDob">Date of Birth *</Label>
+                      <Input
+                        id="childDob"
+                        type="date"
+                        value={afterSchoolFormData.childDob}
+                        onChange={handleAfterSchoolInputChange}
+                        required
+                      />
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="child-school">School *</Label>
-                      <Input id="child-school" required />
+                      <Label htmlFor="childSchool">School *</Label>
+                      <Input
+                        id="childSchool"
+                        value={afterSchoolFormData.childSchool}
+                        onChange={handleAfterSchoolInputChange}
+                        required
+                      />
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="child-class">Class/Year Group *</Label>
-                      <Input id="child-class" required />
+                      <Label htmlFor="childClass">Class/Year Group *</Label>
+                      <Input
+                        id="childClass"
+                        value={afterSchoolFormData.childClass}
+                        onChange={handleAfterSchoolInputChange}
+                        required
+                      />
                     </div>
                   </div>
                 </div>
@@ -131,33 +390,65 @@ export default function RegisterPage() {
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <Label htmlFor="parent-first-name">First Name *</Label>
-                      <Input id="parent-first-name" required />
+                      <Label htmlFor="parentFirstName">First Name *</Label>
+                      <Input
+                        id="parentFirstName"
+                        value={afterSchoolFormData.parentFirstName}
+                        onChange={handleAfterSchoolInputChange}
+                        required
+                      />
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="parent-last-name">Last Name *</Label>
-                      <Input id="parent-last-name" required />
+                      <Label htmlFor="parentLastName">Last Name *</Label>
+                      <Input
+                        id="parentLastName"
+                        value={afterSchoolFormData.parentLastName}
+                        onChange={handleAfterSchoolInputChange}
+                        required
+                      />
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="parent-relationship">Relationship to Child *</Label>
-                      <Input id="parent-relationship" required />
+                      <Label htmlFor="parentRelationship">Relationship to Child *</Label>
+                      <Input
+                        id="parentRelationship"
+                        value={afterSchoolFormData.parentRelationship}
+                        onChange={handleAfterSchoolInputChange}
+                        required
+                      />
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="parent-email">Email Address *</Label>
-                      <Input id="parent-email" type="email" required />
+                      <Label htmlFor="parentEmail">Email Address *</Label>
+                      <Input
+                        id="parentEmail"
+                        type="email"
+                        value={afterSchoolFormData.parentEmail}
+                        onChange={handleAfterSchoolInputChange}
+                        required
+                      />
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="parent-phone">Phone Number *</Label>
-                      <Input id="parent-phone" type="tel" required />
+                      <Label htmlFor="parentPhone">Phone Number *</Label>
+                      <Input
+                        id="parentPhone"
+                        type="tel"
+                        value={afterSchoolFormData.parentPhone}
+                        onChange={handleAfterSchoolInputChange}
+                        required
+                      />
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="parent-address">Home Address *</Label>
-                      <Input id="parent-address" required />
+                      <Label htmlFor="parentAddress">Home Address *</Label>
+                      <Input
+                        id="parentAddress"
+                        value={afterSchoolFormData.parentAddress}
+                        onChange={handleAfterSchoolInputChange}
+                        required
+                      />
                     </div>
                   </div>
                 </div>
@@ -167,7 +458,12 @@ export default function RegisterPage() {
 
                   <div className="space-y-2">
                     <Label>Preferred Location *</Label>
-                    <RadioGroup defaultValue="concordia" required>
+                    <RadioGroup
+                      defaultValue="concordia"
+                      value={afterSchoolFormData.location}
+                      onValueChange={(value) => handleAfterSchoolSelectChange("location", value)}
+                      required
+                    >
                       <div className="flex items-center space-x-2">
                         <RadioGroupItem value="concordia" id="concordia" />
                         <Label htmlFor="concordia">Concordia Academy</Label>
@@ -183,31 +479,67 @@ export default function RegisterPage() {
                     <Label>Days Required (select all that apply) *</Label>
                     <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
                       <div className="flex items-center space-x-2">
-                        <input type="checkbox" id="monday" className="rounded text-[#3aa756]" />
+                        <input
+                          type="checkbox"
+                          id="monday"
+                          className="rounded text-[#3aa756]"
+                          checked={afterSchoolFormData.days.monday}
+                          onChange={handleAfterSchoolInputChange}
+                        />
                         <Label htmlFor="monday">Monday</Label>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <input type="checkbox" id="tuesday" className="rounded text-[#3aa756]" />
+                        <input
+                          type="checkbox"
+                          id="tuesday"
+                          className="rounded text-[#3aa756]"
+                          checked={afterSchoolFormData.days.tuesday}
+                          onChange={handleAfterSchoolInputChange}
+                        />
                         <Label htmlFor="tuesday">Tuesday</Label>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <input type="checkbox" id="wednesday" className="rounded text-[#3aa756]" />
+                        <input
+                          type="checkbox"
+                          id="wednesday"
+                          className="rounded text-[#3aa756]"
+                          checked={afterSchoolFormData.days.wednesday}
+                          onChange={handleAfterSchoolInputChange}
+                        />
                         <Label htmlFor="wednesday">Wednesday</Label>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <input type="checkbox" id="thursday" className="rounded text-[#3aa756]" />
+                        <input
+                          type="checkbox"
+                          id="thursday"
+                          className="rounded text-[#3aa756]"
+                          checked={afterSchoolFormData.days.thursday}
+                          onChange={handleAfterSchoolInputChange}
+                        />
                         <Label htmlFor="thursday">Thursday</Label>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <input type="checkbox" id="friday" className="rounded text-[#3aa756]" />
+                        <input
+                          type="checkbox"
+                          id="friday"
+                          className="rounded text-[#3aa756]"
+                          checked={afterSchoolFormData.days.friday}
+                          onChange={handleAfterSchoolInputChange}
+                        />
                         <Label htmlFor="friday">Friday</Label>
                       </div>
                     </div>
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="start-date">Requested Start Date *</Label>
-                    <Input id="start-date" type="date" required />
+                    <Label htmlFor="startDate">Requested Start Date *</Label>
+                    <Input
+                      id="startDate"
+                      type="date"
+                      value={afterSchoolFormData.startDate}
+                      onChange={handleAfterSchoolInputChange}
+                      required
+                    />
                   </div>
                 </div>
 
@@ -219,14 +551,18 @@ export default function RegisterPage() {
                     <Textarea
                       id="medical"
                       placeholder="Please provide details of any medical conditions, allergies, or dietary requirements"
+                      value={afterSchoolFormData.medical}
+                      onChange={handleAfterSchoolInputChange}
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="additional-info">Additional Information</Label>
+                    <Label htmlFor="additionalInfo">Additional Information</Label>
                     <Textarea
-                      id="additional-info"
+                      id="additionalInfo"
                       placeholder="Please provide any other information that you think would be helpful for us to know"
+                      value={afterSchoolFormData.additionalInfo}
+                      onChange={handleAfterSchoolInputChange}
                     />
                   </div>
                 </div>
@@ -235,22 +571,42 @@ export default function RegisterPage() {
                   <h3 className="text-lg font-semibold text-[#3aa756]">Agreements</h3>
 
                   <div className="flex items-center space-x-2">
-                    <input type="checkbox" id="terms" className="rounded text-[#3aa756]" required />
+                    <input
+                      type="checkbox"
+                      id="terms"
+                      className="rounded text-[#3aa756]"
+                      checked={afterSchoolFormData.terms}
+                      onChange={handleAfterSchoolInputChange}
+                      required
+                    />
                     <Label htmlFor="terms" className="text-sm">
                       I agree to the terms and conditions of the After School Club *
                     </Label>
                   </div>
 
                   <div className="flex items-center space-x-2">
-                    <input type="checkbox" id="photo-consent" className="rounded text-[#3aa756]" />
-                    <Label htmlFor="photo-consent" className="text-sm">
+                    <input
+                      type="checkbox"
+                      id="photoConsent"
+                      className="rounded text-[#3aa756]"
+                      checked={afterSchoolFormData.photoConsent}
+                      onChange={handleAfterSchoolInputChange}
+                    />
+                    <Label htmlFor="photoConsent" className="text-sm">
                       I give permission for photographs of my child to be taken for use within the club and for
                       promotional purposes
                     </Label>
                   </div>
 
                   <div className="flex items-center space-x-2">
-                    <input type="checkbox" id="privacy" className="rounded text-[#3aa756]" required />
+                    <input
+                      type="checkbox"
+                      id="privacy"
+                      className="rounded text-[#3aa756]"
+                      checked={afterSchoolFormData.privacy}
+                      onChange={handleAfterSchoolInputChange}
+                      required
+                    />
                     <Label htmlFor="privacy" className="text-sm">
                       I consent to Little Market After School Club storing and processing my data in accordance with the
                       Privacy Policy *
@@ -258,8 +614,15 @@ export default function RegisterPage() {
                   </div>
                 </div>
 
-                <Button type="submit" className="bg-[#3aa756] hover:bg-[#2d8444] text-white">
-                  Submit Registration
+                <Button type="submit" className="bg-[#3aa756] hover:bg-[#2d8444] text-white" disabled={isSubmitting}>
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Submitting...
+                    </>
+                  ) : (
+                    "Submit Registration"
+                  )}
                 </Button>
               </form>
             </CardContent>
@@ -267,37 +630,58 @@ export default function RegisterPage() {
         </TabsContent>
 
         <TabsContent value="holiday" className="mt-6">
-          <Card className="py-0">
-            <CardHeader className="bg-[#3aa756] text-white text-lg md:text-xl lg:text-2xl p-4">
+          <Card>
+            <CardHeader className="bg-[#3aa756] text-white">
               <CardTitle>Holiday Club Registration</CardTitle>
               <CardDescription className="text-white/80">
                 All fields marked with an asterisk (*) are required
               </CardDescription>
             </CardHeader>
-            <CardContent className="py-6">
+            <CardContent className="pt-6">
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="space-y-4">
                   <h3 className="text-lg font-semibold text-[#3aa756]">Child's Information</h3>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <Label htmlFor="hc-child-first-name">First Name *</Label>
-                      <Input id="hc-child-first-name" required />
+                      <Label htmlFor="hc-childFirstName">First Name *</Label>
+                      <Input
+                        id="hc-childFirstName"
+                        value={holidayFormData.childFirstName}
+                        onChange={handleHolidayInputChange}
+                        required
+                      />
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="hc-child-last-name">Last Name *</Label>
-                      <Input id="hc-child-last-name" required />
+                      <Label htmlFor="hc-childLastName">Last Name *</Label>
+                      <Input
+                        id="hc-childLastName"
+                        value={holidayFormData.childLastName}
+                        onChange={handleHolidayInputChange}
+                        required
+                      />
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="hc-child-dob">Date of Birth *</Label>
-                      <Input id="hc-child-dob" type="date" required />
+                      <Label htmlFor="hc-childDob">Date of Birth *</Label>
+                      <Input
+                        id="hc-childDob"
+                        type="date"
+                        value={holidayFormData.childDob}
+                        onChange={handleHolidayInputChange}
+                        required
+                      />
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="hc-child-school">School *</Label>
-                      <Input id="hc-child-school" required />
+                      <Label htmlFor="hc-childSchool">School *</Label>
+                      <Input
+                        id="hc-childSchool"
+                        value={holidayFormData.childSchool}
+                        onChange={handleHolidayInputChange}
+                        required
+                      />
                     </div>
                   </div>
                 </div>
@@ -307,23 +691,45 @@ export default function RegisterPage() {
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <Label htmlFor="hc-parent-first-name">First Name *</Label>
-                      <Input id="hc-parent-first-name" required />
+                      <Label htmlFor="hc-parentFirstName">First Name *</Label>
+                      <Input
+                        id="hc-parentFirstName"
+                        value={holidayFormData.parentFirstName}
+                        onChange={handleHolidayInputChange}
+                        required
+                      />
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="hc-parent-last-name">Last Name *</Label>
-                      <Input id="hc-parent-last-name" required />
+                      <Label htmlFor="hc-parentLastName">Last Name *</Label>
+                      <Input
+                        id="hc-parentLastName"
+                        value={holidayFormData.parentLastName}
+                        onChange={handleHolidayInputChange}
+                        required
+                      />
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="hc-parent-email">Email Address *</Label>
-                      <Input id="hc-parent-email" type="email" required />
+                      <Label htmlFor="hc-parentEmail">Email Address *</Label>
+                      <Input
+                        id="hc-parentEmail"
+                        type="email"
+                        value={holidayFormData.parentEmail}
+                        onChange={handleHolidayInputChange}
+                        required
+                      />
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="hc-parent-phone">Phone Number *</Label>
-                      <Input id="hc-parent-phone" type="tel" required />
+                      <Label htmlFor="hc-parentPhone">Phone Number *</Label>
+                      <Input
+                        id="hc-parentPhone"
+                        type="tel"
+                        value={holidayFormData.parentPhone}
+                        onChange={handleHolidayInputChange}
+                        required
+                      />
                     </div>
                   </div>
                 </div>
@@ -333,7 +739,12 @@ export default function RegisterPage() {
 
                   <div className="space-y-2">
                     <Label>Preferred Location *</Label>
-                    <RadioGroup defaultValue="concordia" required>
+                    <RadioGroup
+                      defaultValue="concordia"
+                      value={holidayFormData.location}
+                      onValueChange={(value) => handleHolidaySelectChange("hc-location", value)}
+                      required
+                    >
                       <div className="flex items-center space-x-2">
                         <RadioGroupItem value="concordia" id="hc-concordia" />
                         <Label htmlFor="hc-concordia">Concordia Academy</Label>
@@ -346,9 +757,13 @@ export default function RegisterPage() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="holiday-period">Holiday Period *</Label>
-                    <Select required>
-                      <SelectTrigger id="holiday-period">
+                    <Label htmlFor="holidayPeriod">Holiday Period *</Label>
+                    <Select
+                      required
+                      value={holidayFormData.holidayPeriod}
+                      onValueChange={(value) => handleHolidaySelectChange("hc-holidayPeriod", value)}
+                    >
+                      <SelectTrigger id="holidayPeriod">
                         <SelectValue placeholder="Select holiday period" />
                       </SelectTrigger>
                       <SelectContent>
@@ -366,23 +781,53 @@ export default function RegisterPage() {
                     <Label>Days Required (select all that apply) *</Label>
                     <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
                       <div className="flex items-center space-x-2">
-                        <input type="checkbox" id="hc-monday" className="rounded text-[#3aa756]" />
+                        <input
+                          type="checkbox"
+                          id="hc-monday"
+                          className="rounded text-[#3aa756]"
+                          checked={holidayFormData.days.monday}
+                          onChange={handleHolidayInputChange}
+                        />
                         <Label htmlFor="hc-monday">Monday</Label>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <input type="checkbox" id="hc-tuesday" className="rounded text-[#3aa756]" />
+                        <input
+                          type="checkbox"
+                          id="hc-tuesday"
+                          className="rounded text-[#3aa756]"
+                          checked={holidayFormData.days.tuesday}
+                          onChange={handleHolidayInputChange}
+                        />
                         <Label htmlFor="hc-tuesday">Tuesday</Label>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <input type="checkbox" id="hc-wednesday" className="rounded text-[#3aa756]" />
+                        <input
+                          type="checkbox"
+                          id="hc-wednesday"
+                          className="rounded text-[#3aa756]"
+                          checked={holidayFormData.days.wednesday}
+                          onChange={handleHolidayInputChange}
+                        />
                         <Label htmlFor="hc-wednesday">Wednesday</Label>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <input type="checkbox" id="hc-thursday" className="rounded text-[#3aa756]" />
+                        <input
+                          type="checkbox"
+                          id="hc-thursday"
+                          className="rounded text-[#3aa756]"
+                          checked={holidayFormData.days.thursday}
+                          onChange={handleHolidayInputChange}
+                        />
                         <Label htmlFor="hc-thursday">Thursday</Label>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <input type="checkbox" id="hc-friday" className="rounded text-[#3aa756]" />
+                        <input
+                          type="checkbox"
+                          id="hc-friday"
+                          className="rounded text-[#3aa756]"
+                          checked={holidayFormData.days.friday}
+                          onChange={handleHolidayInputChange}
+                        />
                         <Label htmlFor="hc-friday">Friday</Label>
                       </div>
                     </div>
@@ -390,7 +835,12 @@ export default function RegisterPage() {
 
                   <div className="space-y-2">
                     <Label>Session Type *</Label>
-                    <RadioGroup defaultValue="full-day" required>
+                    <RadioGroup
+                      defaultValue="full-day"
+                      value={holidayFormData.sessionType}
+                      onValueChange={(value) => handleHolidaySelectChange("hc-sessionType", value)}
+                      required
+                    >
                       <div className="flex items-center space-x-2">
                         <RadioGroupItem value="full-day" id="full-day" />
                         <Label htmlFor="full-day">Full Day (8:00 AM - 6:00 PM)</Label>
@@ -415,6 +865,8 @@ export default function RegisterPage() {
                     <Textarea
                       id="hc-medical"
                       placeholder="Please provide details of any medical conditions, allergies, or dietary requirements"
+                      value={holidayFormData.medical}
+                      onChange={handleHolidayInputChange}
                     />
                   </div>
                 </div>
@@ -423,22 +875,42 @@ export default function RegisterPage() {
                   <h3 className="text-lg font-semibold text-[#3aa756]">Agreements</h3>
 
                   <div className="flex items-center space-x-2">
-                    <input type="checkbox" id="hc-terms" className="rounded text-[#3aa756]" required />
+                    <input
+                      type="checkbox"
+                      id="hc-terms"
+                      className="rounded text-[#3aa756]"
+                      checked={holidayFormData.terms}
+                      onChange={handleHolidayInputChange}
+                      required
+                    />
                     <Label htmlFor="hc-terms" className="text-sm">
                       I agree to the terms and conditions of the Holiday Club *
                     </Label>
                   </div>
 
                   <div className="flex items-center space-x-2">
-                    <input type="checkbox" id="hc-photo-consent" className="rounded text-[#3aa756]" />
-                    <Label htmlFor="hc-photo-consent" className="text-sm">
+                    <input
+                      type="checkbox"
+                      id="hc-photoConsent"
+                      className="rounded text-[#3aa756]"
+                      checked={holidayFormData.photoConsent}
+                      onChange={handleHolidayInputChange}
+                    />
+                    <Label htmlFor="hc-photoConsent" className="text-sm">
                       I give permission for photographs of my child to be taken for use within the club and for
                       promotional purposes
                     </Label>
                   </div>
 
                   <div className="flex items-center space-x-2">
-                    <input type="checkbox" id="hc-privacy" className="rounded text-[#3aa756]" required />
+                    <input
+                      type="checkbox"
+                      id="hc-privacy"
+                      className="rounded text-[#3aa756]"
+                      checked={holidayFormData.privacy}
+                      onChange={handleHolidayInputChange}
+                      required
+                    />
                     <Label htmlFor="hc-privacy" className="text-sm">
                       I consent to Little Market After School Club storing and processing my data in accordance with the
                       Privacy Policy *
@@ -446,8 +918,15 @@ export default function RegisterPage() {
                   </div>
                 </div>
 
-                <Button type="submit" className="bg-[#3aa756] hover:bg-[#2d8444] text-white">
-                  Submit Registration
+                <Button type="submit" className="bg-[#3aa756] hover:bg-[#2d8444] text-white" disabled={isSubmitting}>
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Submitting...
+                    </>
+                  ) : (
+                    "Submit Registration"
+                  )}
                 </Button>
               </form>
             </CardContent>

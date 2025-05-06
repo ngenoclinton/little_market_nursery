@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -10,16 +10,138 @@ import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
-import { Calendar, Clock, MapPin, Phone, Mail, CheckCircle } from "lucide-react"
+import { Calendar, Clock, MapPin, Phone, Mail, CheckCircle, Loader2 } from "lucide-react"
+import { initEmailJS, sendFormData, EMAIL_TEMPLATES } from "@/lib/afterschool/arrangevisitemailjs"
+import { useToast } from "@/hooks/use-toast"
 
 export default function ArrangeVisitClientPage() {
   const [formSubmitted, setFormSubmitted] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [formData, setFormData] = useState({
+    parentName: "",
+    childName: "",
+    childAge: "",
+    phone: "",
+    email: "",
+    school: "",
+    location: "concordia",
+    visitDays: {
+      monday: false,
+      tuesday: false,
+      wednesday: false,
+      thursday: false,
+      friday: false,
+    },
+    visitTime: "afternoon",
+    message: "",
+    consent: false,
+  })
+  const { toast } = useToast()
 
-  const handleSubmit = (e: React.FormEvent) => {
+  useEffect(() => {
+    // Initialize EmailJS when component mounts
+    initEmailJS()
+  }, [])
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { id, value } = e.target
+    setFormData((prev) => ({
+      ...prev,
+      [id]: value,
+    }))
+  }
+
+  const handleSelectChange = (id: string, value: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      [id]: value,
+    }))
+  }
+
+  const handleRadioChange = (id: string, value: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      [id]: value,
+    }))
+  }
+
+  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, checked } = e.target
+
+    if (id === "consent") {
+      setFormData((prev) => ({
+        ...prev,
+        consent: checked,
+      }))
+    } else if (
+      id.startsWith("monday") ||
+      id.startsWith("tuesday") ||
+      id.startsWith("wednesday") ||
+      id.startsWith("thursday") ||
+      id.startsWith("friday")
+    ) {
+      setFormData((prev) => ({
+        ...prev,
+        visitDays: {
+          ...prev.visitDays,
+          [id]: checked,
+        },
+      }))
+    }
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // In a real application, you would handle the form submission here
-    // For this example, we'll just show a success message
-    setFormSubmitted(true)
+    setIsSubmitting(true)
+
+    try {
+      // Format the days for email
+      const selectedDays = Object.entries(formData.visitDays)
+        .filter(([_, selected]) => selected)
+        .map(([day]) => day.charAt(0).toUpperCase() + day.slice(1))
+        .join(", ")
+
+      // Prepare data for EmailJS
+      const emailData = {
+        parent_name: formData.parentName,
+        child_name: formData.childName,
+        child_age: formData.childAge,
+        phone: formData.phone,
+        email: formData.email,
+        school: formData.school,
+        location: formData.location === "concordia" ? "Concordia Academy" : "Wykeham Hall",
+        visit_days: selectedDays || "None selected",
+        visit_time:
+          formData.visitTime === "afternoon" ? "Afternoon (3:30 PM - 4:30 PM)" : "Evening (5:00 PM - 6:00 PM)",
+        message: formData.message || "No additional information provided",
+        form_type: "After School Club Arrange Visit Request",
+      }
+
+      const result = await sendFormData(process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID as string, emailData)
+      
+      if (result.success) {
+        setFormSubmitted(true)
+        toast({
+          title: "Request Submitted",
+          description: "Your visit request has been sent successfully.",
+        })
+      } else {
+        toast({
+          title: "Submission Failed",
+          description: "There was a problem sending your request. Please try again.",
+          variant: "destructive",
+        })
+      }
+    } catch (error) {
+      console.error("Form submission error:", error)
+      toast({
+        title: "Submission Error",
+        description: "An unexpected error occurred. Please try again later.",
+        variant: "destructive",
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   if (formSubmitted) {
@@ -58,30 +180,34 @@ export default function ArrangeVisitClientPage() {
             </p>
           </div>
 
-          <Card className="py-0">
-            <CardHeader className="bg-[#3aa756] text-white text-lg md:text-xl lg:text-2xl p-4">
+          <Card>
+            <CardHeader className="bg-[#3aa756] text-white">
               <CardTitle>Visit Request Form</CardTitle>
               <CardDescription className="text-white/80">
                 All fields marked with an asterisk (*) are required
               </CardDescription>
             </CardHeader>
-            <CardContent className="py-5">
+            <CardContent className="pt-6">
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <Label htmlFor="parent-name">Parent/Guardian Name *</Label>
-                    <Input id="parent-name" required />
+                    <Label htmlFor="parentName">Parent/Guardian Name *</Label>
+                    <Input id="parentName" value={formData.parentName} onChange={handleInputChange} required />
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="child-name">Child's Name *</Label>
-                    <Input id="child-name" required />
+                    <Label htmlFor="childName">Child's Name *</Label>
+                    <Input id="childName" value={formData.childName} onChange={handleInputChange} required />
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="child-age">Child's Age *</Label>
-                    <Select required>
-                      <SelectTrigger id="child-age">
+                    <Label htmlFor="childAge">Child's Age *</Label>
+                    <Select
+                      required
+                      value={formData.childAge}
+                      onValueChange={(value) => handleSelectChange("childAge", value)}
+                    >
+                      <SelectTrigger id="childAge">
                         <SelectValue placeholder="Select age" />
                       </SelectTrigger>
                       <SelectContent>
@@ -99,23 +225,28 @@ export default function ArrangeVisitClientPage() {
 
                   <div className="space-y-2">
                     <Label htmlFor="phone">Phone Number *</Label>
-                    <Input id="phone" type="tel" required />
+                    <Input id="phone" type="tel" value={formData.phone} onChange={handleInputChange} required />
                   </div>
 
                   <div className="space-y-2">
                     <Label htmlFor="email">Email Address *</Label>
-                    <Input id="email" type="email" required />
+                    <Input id="email" type="email" value={formData.email} onChange={handleInputChange} required />
                   </div>
 
                   <div className="space-y-2">
                     <Label htmlFor="school">Current/Prospective School *</Label>
-                    <Input id="school" required />
+                    <Input id="school" value={formData.school} onChange={handleInputChange} required />
                   </div>
                 </div>
 
                 <div className="space-y-2">
                   <Label>Preferred Location *</Label>
-                  <RadioGroup defaultValue="concordia" required>
+                  <RadioGroup
+                    defaultValue="concordia"
+                    value={formData.location}
+                    onValueChange={(value) => handleRadioChange("location", value)}
+                    required
+                  >
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="concordia" id="concordia" />
                       <Label htmlFor="concordia">Concordia Academy</Label>
@@ -131,23 +262,53 @@ export default function ArrangeVisitClientPage() {
                   <Label>Preferred Visit Days (select all that apply) *</Label>
                   <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
                     <div className="flex items-center space-x-2">
-                      <input type="checkbox" id="monday" className="rounded text-[#3aa756]" />
+                      <input
+                        type="checkbox"
+                        id="monday"
+                        className="rounded text-[#3aa756]"
+                        checked={formData.visitDays.monday}
+                        onChange={handleCheckboxChange}
+                      />
                       <Label htmlFor="monday">Monday</Label>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <input type="checkbox" id="tuesday" className="rounded text-[#3aa756]" />
+                      <input
+                        type="checkbox"
+                        id="tuesday"
+                        className="rounded text-[#3aa756]"
+                        checked={formData.visitDays.tuesday}
+                        onChange={handleCheckboxChange}
+                      />
                       <Label htmlFor="tuesday">Tuesday</Label>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <input type="checkbox" id="wednesday" className="rounded text-[#3aa756]" />
+                      <input
+                        type="checkbox"
+                        id="wednesday"
+                        className="rounded text-[#3aa756]"
+                        checked={formData.visitDays.wednesday}
+                        onChange={handleCheckboxChange}
+                      />
                       <Label htmlFor="wednesday">Wednesday</Label>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <input type="checkbox" id="thursday" className="rounded text-[#3aa756]" />
+                      <input
+                        type="checkbox"
+                        id="thursday"
+                        className="rounded text-[#3aa756]"
+                        checked={formData.visitDays.thursday}
+                        onChange={handleCheckboxChange}
+                      />
                       <Label htmlFor="thursday">Thursday</Label>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <input type="checkbox" id="friday" className="rounded text-[#3aa756]" />
+                      <input
+                        type="checkbox"
+                        id="friday"
+                        className="rounded text-[#3aa756]"
+                        checked={formData.visitDays.friday}
+                        onChange={handleCheckboxChange}
+                      />
                       <Label htmlFor="friday">Friday</Label>
                     </div>
                   </div>
@@ -155,7 +316,12 @@ export default function ArrangeVisitClientPage() {
 
                 <div className="space-y-2">
                   <Label>Preferred Visit Time *</Label>
-                  <RadioGroup defaultValue="afternoon" required>
+                  <RadioGroup
+                    defaultValue="afternoon"
+                    value={formData.visitTime}
+                    onValueChange={(value) => handleRadioChange("visitTime", value)}
+                    required
+                  >
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="afternoon" id="afternoon" />
                       <Label htmlFor="afternoon">Afternoon (3:30 PM - 4:30 PM)</Label>
@@ -173,19 +339,35 @@ export default function ArrangeVisitClientPage() {
                     id="message"
                     placeholder="Please let us know any specific questions or requirements you have for your visit"
                     className="min-h-[100px]"
+                    value={formData.message}
+                    onChange={handleInputChange}
                   />
                 </div>
 
                 <div className="flex items-center space-x-2">
-                  <input type="checkbox" id="consent" className="rounded text-[#3aa756]" required />
+                  <input
+                    type="checkbox"
+                    id="consent"
+                    className="rounded text-[#3aa756]"
+                    checked={formData.consent}
+                    onChange={handleCheckboxChange}
+                    required
+                  />
                   <Label htmlFor="consent" className="text-sm">
                     I consent to Little Market After School Club storing and processing my data in accordance with the
                     Privacy Policy *
                   </Label>
                 </div>
 
-                <Button type="submit" className="bg-[#3aa756] hover:bg-[#2d8444] text-white">
-                  Submit Visit Request
+                <Button type="submit" className="bg-[#3aa756] hover:bg-[#2d8444] text-white" disabled={isSubmitting}>
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Submitting...
+                    </>
+                  ) : (
+                    "Submit Visit Request"
+                  )}
                 </Button>
               </form>
             </CardContent>
@@ -193,11 +375,11 @@ export default function ArrangeVisitClientPage() {
         </div>
 
         <div className="space-y-6">
-          <Card className="py-0">
-            <CardHeader className="bg-[#3aa756] text-white text-lg md:text-xl lg:text-2xl p-4">
+          <Card>
+            <CardHeader className="bg-[#3aa756] text-white">
               <CardTitle>Visit Information</CardTitle>
             </CardHeader>
-            <CardContent className="py-5">
+            <CardContent className="pt-6">
               <div className="space-y-4">
                 <div className="flex items-start">
                   <Clock className="h-5 w-5 mr-2 text-[#3aa756] mt-0.5" />
@@ -233,11 +415,11 @@ export default function ArrangeVisitClientPage() {
             </CardContent>
           </Card>
 
-          <Card className="py-0">
-            <CardHeader className="bg-[#3aa756] text-white text-lg md:text-xl lg:text-2xl p-3">
+          <Card>
+            <CardHeader className="bg-[#3aa756] text-white">
               <CardTitle>Contact Us Directly</CardTitle>
             </CardHeader>
-            <CardContent className="py-5 px-3">
+            <CardContent className="pt-6">
               <div className="space-y-4">
                 <div className="flex items-center">
                   <Phone className="h-5 w-5 mr-2 text-[#3aa756]" />

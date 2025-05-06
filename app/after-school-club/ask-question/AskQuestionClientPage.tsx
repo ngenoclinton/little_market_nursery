@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -10,17 +10,89 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { CheckCircle, Phone, Mail } from "lucide-react"
-
+import { CheckCircle, Phone, Mail, Loader2 } from "lucide-react"
+import { initEmailJS, sendFormData, EMAIL_TEMPLATES } from "@/lib/afterschool/askquestionemail"
+import { useToast } from "@/hooks/use-toast"
 
 export default function AskQuestionClientPage() {
   const [formSubmitted, setFormSubmitted] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    topic: "",
+    question: "",
+    consent: false,
+  })
+  const { toast } = useToast()
 
-  const handleSubmit = (e: React.FormEvent) => {
+  useEffect(() => {
+    // Initialize EmailJS when component mounts
+    initEmailJS()
+  }, [])
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { id, value } = e.target
+    setFormData((prev) => ({
+      ...prev,
+      [id]: value,
+    }))
+  }
+
+  const handleSelectChange = (value: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      topic: value,
+    }))
+  }
+
+  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData((prev) => ({
+      ...prev,
+      consent: e.target.checked,
+    }))
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // In a real application, you would handle the form submission here
-    // For this example, we'll just show a success message
-    setFormSubmitted(true)
+    setIsSubmitting(true)
+
+    try {
+      // Prepare data for EmailJS
+      const emailData = {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone || "Not provided",
+        topic: formData.topic,
+        question: formData.question,
+        form_type: "Question Submission",
+      }
+
+const result = await sendFormData(process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID as string, emailData)
+      if (result.success) {
+        setFormSubmitted(true)
+        toast({
+          title: "Question Submitted",
+          description: "Your question has been sent successfully.",
+        })
+      } else {
+        toast({
+          title: "Submission Failed",
+          description: "There was a problem sending your question. Please try again.",
+          variant: "destructive",
+        })
+      }
+    } catch (error) {
+      console.error("Form submission error:", error)
+      toast({
+        title: "Submission Error",
+        description: "An unexpected error occurred. Please try again later.",
+        variant: "destructive",
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const faqs = [
@@ -85,34 +157,34 @@ export default function AskQuestionClientPage() {
             </p>
           </div>
 
-          <Card className="py-0">
-            <CardHeader className="bg-[#3aa756] text-white text-lg md:text-xl lg:text-2xl p-4">
+          <Card>
+            <CardHeader className="bg-[#3aa756] text-white">
               <CardTitle>Contact Form</CardTitle>
               <CardDescription className="text-white/80">
                 All fields marked with an asterisk (*) are required
               </CardDescription>
             </CardHeader>
-            <CardContent className="py-4">
+            <CardContent className="pt-6">
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <Label htmlFor="name">Your Name *</Label>
-                    <Input id="name" required />
+                    <Input id="name" value={formData.name} onChange={handleInputChange} required />
                   </div>
 
                   <div className="space-y-2">
                     <Label htmlFor="email">Email Address *</Label>
-                    <Input id="email" type="email" required />
+                    <Input id="email" type="email" value={formData.email} onChange={handleInputChange} required />
                   </div>
 
                   <div className="space-y-2">
                     <Label htmlFor="phone">Phone Number</Label>
-                    <Input id="phone" type="tel" />
+                    <Input id="phone" type="tel" value={formData.phone} onChange={handleInputChange} />
                   </div>
 
                   <div className="space-y-2">
                     <Label htmlFor="topic">Topic *</Label>
-                    <Select required>
+                    <Select required value={formData.topic} onValueChange={handleSelectChange}>
                       <SelectTrigger id="topic">
                         <SelectValue placeholder="Select topic" />
                       </SelectTrigger>
@@ -134,20 +206,36 @@ export default function AskQuestionClientPage() {
                     id="question"
                     placeholder="Please provide as much detail as possible so we can best assist you"
                     className="min-h-[150px]"
+                    value={formData.question}
+                    onChange={handleInputChange}
                     required
                   />
                 </div>
 
                 <div className="flex items-center space-x-2">
-                  <input type="checkbox" id="consent" className="rounded text-[#3aa756]" required />
+                  <input
+                    type="checkbox"
+                    id="consent"
+                    className="rounded text-[#3aa756]"
+                    checked={formData.consent}
+                    onChange={handleCheckboxChange}
+                    required
+                  />
                   <Label htmlFor="consent" className="text-sm">
                     I consent to Little Market After School Club storing and processing my data in accordance with the
                     Privacy Policy *
                   </Label>
                 </div>
 
-                <Button type="submit" className="bg-[#3aa756] hover:bg-[#2d8444] text-white">
-                  Submit Question
+                <Button type="submit" className="bg-[#3aa756] hover:bg-[#2d8444] text-white" disabled={isSubmitting}>
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Submitting...
+                    </>
+                  ) : (
+                    "Submit Question"
+                  )}
                 </Button>
               </form>
             </CardContent>
@@ -155,11 +243,11 @@ export default function AskQuestionClientPage() {
         </div>
 
         <div className="space-y-6">
-          <Card className="py-0">
-            <CardHeader className="bg-[#3aa756] text-white text-lg md:text-xl lg:text-2xl p-4">
+          <Card>
+            <CardHeader className="bg-[#3aa756] text-white">
               <CardTitle>Contact Us Directly</CardTitle>
             </CardHeader>
-            <CardContent className="py-6 px-2">
+            <CardContent className="pt-6">
               <div className="space-y-4">
                 <div className="flex items-center">
                   <Phone className="h-5 w-5 mr-2 text-[#3aa756]" />
@@ -173,11 +261,11 @@ export default function AskQuestionClientPage() {
             </CardContent>
           </Card>
 
-          <Card className="py-0">
-            <CardHeader className="bg-[#3aa756] text-white text-lg md:text-xl lg:text-2xl p-4">
+          <Card>
+            <CardHeader className="bg-[#3aa756] text-white">
               <CardTitle>Frequently Asked Questions</CardTitle>
             </CardHeader>
-            <CardContent className="py-5">
+            <CardContent className="pt-6">
               <Accordion type="single" collapsible className="w-full">
                 {faqs.map((faq, index) => (
                   <AccordionItem key={index} value={`item-${index}`}>
